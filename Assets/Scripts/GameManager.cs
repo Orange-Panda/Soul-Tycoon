@@ -7,22 +7,22 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-	public const byte hourLength = 6;
+	public const byte hourLength = 2;
 	public static byte hour = 1;
 	public static uint day = 1;
 	Coroutine hourCycle;
 	public static GameSpeed gameSpeed = GameSpeed.Paused;
 
 	public delegate void TimeEvent();
-	public static event TimeEvent HourTick;
-	public static event TimeEvent DayTick;
+	public static event TimeEvent HourTick = delegate { };
+	public static event TimeEvent DayTick = delegate { };
 
 	public static Dictionary<GameSpeed, float> speedValues = new Dictionary<GameSpeed, float>()
 	{
 		{ GameSpeed.Paused, 0.00f },
-		{ GameSpeed.Slow, 0.65f },
+		{ GameSpeed.Slow, 0.55f },
 		{ GameSpeed.Standard, 1f },
-		{ GameSpeed.Fast, 1.5f }
+		{ GameSpeed.Fast, 2f }
 	};
 
 	/// <summary>
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	IEnumerator HourCycle()
 	{
-		while(true)
+		while (true)
 		{
 			yield return new WaitForSeconds(hourLength);
 			hour++;
