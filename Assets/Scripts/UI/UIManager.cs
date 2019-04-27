@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages the methods used by the interface.
@@ -10,7 +11,7 @@ public class UIManager : MonoBehaviour
 	/// </summary>
 	public void Sacrifice(GameObject gameObject)
 	{
-		Player.Deposit(1);
+		Player.SetCurrency(1);
 		GameManager.SetGameSpeed(GameSpeed.Standard);
 		Destroy(gameObject);
 	}
@@ -21,5 +22,13 @@ public class UIManager : MonoBehaviour
 	public void SetGameSpeed(int gameSpeed)
 	{
 		GameManager.SetGameSpeed((GameSpeed)gameSpeed);
+	}
+
+	/// <summary>
+	/// Change to the argument scene
+	/// </summary>
+	public void SetScene(int index)
+	{
+		SceneManager.LoadScene(index);
 	}
 }

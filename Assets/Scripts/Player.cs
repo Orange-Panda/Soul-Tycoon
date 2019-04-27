@@ -2,12 +2,22 @@
 {
 	public static int currency = 0;
 
+	public delegate void CurrencyHandler();
+	public static event CurrencyHandler CurrencyValueChanged = delegate { };
+
 	/// <summary>
 	/// Adds currency to the players balance. Will never fail.
 	/// </summary>
 	public static void Deposit(uint value)
 	{
 		currency += (int)value;
+		CurrencyValueChanged();
+	}
+
+	public static void SetCurrency(int value)
+	{
+		currency = value;
+		CurrencyValueChanged();
 	}
 
 	/// <summary>
@@ -17,6 +27,7 @@
 	{
 		bool insufficient = currency - value < 0;
 		currency = insufficient ? currency : currency - (int)value;
+		CurrencyValueChanged();
 		return !insufficient;
 	}
 
@@ -26,5 +37,6 @@
 	public static void ForceWithdraw(uint value)
 	{
 		currency -= (int)value;
+		CurrencyValueChanged();
 	}
 }

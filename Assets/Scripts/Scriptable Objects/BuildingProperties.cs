@@ -10,6 +10,7 @@ public abstract class BuildingProperties : ScriptableObject
 	public string title = "Building";
 	public string description = "Does some cool stuff";
 	public Sprite icon;
+	public bool starter = false;
 
 	[Header("Building Properties")]
 	[Tooltip("The amount it costs to initially place the building.")]
