@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -10,11 +8,13 @@ public class Tile : MonoBehaviour
 	private bool purchased = false;
 	[Header("References")]
 	public TextMeshPro textMesh;
-	public SpriteRenderer fill, border, buiilding;
+	public SpriteRenderer fill, border, buildingSprite;
+	public static bool inputEnabled = true;
+	public BuildingProperties building;
 
 	private void Start()
 	{
-		if(properties == null)
+		if (properties == null)
 		{
 			border.color = new Color(0.3f, 0.3f, 0.3f, 1f);
 			fill.color = new Color(0.3f, 0f, 0f, 1f);
@@ -41,9 +41,9 @@ public class Tile : MonoBehaviour
 
 	private void GameManager_DayTick()
 	{
-		if(purchased)
+		if (purchased && GetComponent<ProductionBuilding>())
 		{
-			Player.ForceWithdraw(properties.tileRentCost);
+			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost);
 		}
 	}
 
@@ -59,9 +59,13 @@ public class Tile : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		if(!purchased)
+		if (!inputEnabled) return;
+
+		ProductionBuilding productionBuilding;
+
+		if (!purchased)
 		{
-			if(Player.Withdraw(properties.tilePurchaseCost))
+			if (Player.Withdraw(properties.tilePurchaseCost))
 			{
 				purchased = true;
 				fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
@@ -72,6 +76,17 @@ public class Tile : MonoBehaviour
 			{
 				Debug.Log("Insufficient funds");
 			}
+		}
+		else if (productionBuilding = GetComponent<ProductionBuilding>())
+		{
+			if(!productionBuilding.GatherCurrency())
+			{
+				//TODO: Create utilities menu.
+			}
+		}
+		else
+		{
+			//TODO: Create buy menu.
 		}
 	}
 }

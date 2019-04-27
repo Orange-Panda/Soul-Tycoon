@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
 		{ GameSpeed.Paused, 0.01f },
 		{ GameSpeed.Slow, 0.55f },
 		{ GameSpeed.Standard, 1f },
-		{ GameSpeed.Fast, 2f }
+		{ GameSpeed.Fast, 2f },
+		{ GameSpeed.VeryFast, 4f },
 	};
 
 	/// <summary>
@@ -63,5 +64,5 @@ public class GameManager : MonoBehaviour
 
 public enum GameSpeed
 {
-	Paused, Slow, Standard, Fast
+	Paused, Slow, Standard, Fast, VeryFast
 }
