@@ -8,6 +8,7 @@ public abstract class BuildingProperties : ScriptableObject
 {
 	[Header("Building Metadata")]
 	public string title = "Building";
+	[TextArea]
 	public string description = "Does some cool stuff";
 	public Sprite icon;
 	public bool starter = false;

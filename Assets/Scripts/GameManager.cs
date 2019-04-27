@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
 	public static Dictionary<GameSpeed, float> speedValues = new Dictionary<GameSpeed, float>()
 	{
-		{ GameSpeed.Paused, 0.00f },
+		{ GameSpeed.Paused, 0.01f },
 		{ GameSpeed.Slow, 0.55f },
 		{ GameSpeed.Standard, 1f },
 		{ GameSpeed.Fast, 2f }

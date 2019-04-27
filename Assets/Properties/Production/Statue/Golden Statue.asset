@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
+  m_Name: Golden Statue
+  m_EditorClassIdentifier: 
+  title: Building
+  description: Passively generates an absurd amount of currency
+  icon: {fileID: 0}
+  starter: 0
+  cost: 10000000
+  value: 10000000
+  durability: 1000
+  repairCost: 0
+  damagedThreshold: 0
+  damagedMultiplier: 1
+  potentialDisasters: []
+  yieldBase: 250000
+  yieldVariance: 0
+  yieldBaseRate: 24
+  maxCurrency: 5000000
