@@ -1,7 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Handles the purchasing of land and buildings.
+/// </summary>
 public class Tile : MonoBehaviour
 {
 	[Space]
@@ -13,37 +15,14 @@ public class Tile : MonoBehaviour
 	public static bool inputEnabled = true;
 	public BuildingProperties building;
 
-	internal bool PurchaseBuilding(ProductionProperties properties)
-	{
-		if(building == null && Player.Withdraw(properties.cost, transform.position))
-		{
-			building = properties;
-			buildingSprite.sprite = building.sprite;
-			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
-			production.InitializeBuilding(properties);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	internal void Sell()
-	{
-		buildingSprite.sprite = null;
-		Player.Deposit(building.value, transform.position);
-		building = null;
-		Destroy(GetComponent<ProductionBuilding>());
-	}
-
 	private void OnEnable()
 	{
+		//Handles missing properties if Luke forgot to add the properties.
 		if (properties == null)
 		{
 			border.color = new Color(0.3f, 0.3f, 0.3f, 1f);
 			fill.color = new Color(0.3f, 0f, 0f, 1f);
-			textMesh.SetText("");
+			textMesh.SetText("N/A");
 			enabled = false;
 		}
 		else
@@ -59,14 +38,6 @@ public class Tile : MonoBehaviour
 	private void OnDisable()
 	{
 		GameManager.DayTick -= GameManager_DayTick;
-	}
-
-	private void GameManager_DayTick()
-	{
-		if (purchased && GetComponent<ProductionBuilding>())
-		{
-			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost, transform.position, false);
-		}
 	}
 
 	private void OnMouseEnter()
@@ -85,34 +56,84 @@ public class Tile : MonoBehaviour
 
 		ProductionBuilding productionBuilding;
 
+		//Handle purchasing if the tile is not already owned
 		if (!purchased)
 		{
+			//If the player has enough money to purchase this tile, purchase it.
 			if (Player.Withdraw(properties.tilePurchaseCost, transform.position))
 			{
 				purchased = true;
 				fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
 				textMesh.SetText("");
-				Debug.Log("Tile has been purchased");
-			}
-			else
-			{
-				Debug.Log("Insufficient funds");
 			}
 		}
+		//If they have a production building on it already, open up the modify menu.
 		else if (productionBuilding = GetComponent<ProductionBuilding>())
 		{
-			if(!productionBuilding.GatherCurrency())
+			if (!productionBuilding.GatherCurrency())
 			{
 				CreateMenu("Modify");
 			}
 		}
+		//If they own they tile and don't have a building, open up the buy menu.
 		else
 		{
 			CreateMenu(properties.tileType.ToString());
 		}
 	}
 
+	private void GameManager_DayTick()
+	{
+		ProductionBuilding building;
 
+		//If the tile is owned and has a building, have the player pay rent. If they can't afford rent disable the building for today.
+		if (purchased && (building = GetComponent<ProductionBuilding>()))
+		{
+			building.powered = Player.Withdraw(properties.tileRentCost, transform.position, false);
+		}
+	}
+
+	/// <summary>
+	/// Attempts to purchase the argument building.
+	/// </summary>
+	internal bool PurchaseBuilding(ProductionProperties properties)
+	{
+		if (building == null && Player.Withdraw(properties.cost, transform.position))
+		{
+			building = properties;
+			buildingSprite.sprite = building.sprite;
+			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
+			production.InitializeBuilding(properties);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/// <summary>
+	/// Sells the building on the tile.
+	/// </summary>
+	internal void Sell()
+	{
+		if (building != null)
+		{
+			Player.Deposit(building.value, transform.position);
+			Destroy(GetComponent<ProductionBuilding>());
+			building = null;
+			buildingSprite.sprite = null;
+
+			//Stop particle systems to prevent them from lingering.
+			var emission = GetComponent<ParticleSystem>().emission;
+			emission.rateOverTime = 0;
+			buildingSprite.GetComponent<ParticleSystem>().Stop();
+		}
+	}
+
+	/// <summary>
+	/// Creates a menu with the name of the argument string.
+	/// </summary>
 	private void CreateMenu(string value)
 	{
 		GameObject buyPanel = Instantiate(Resources.Load<GameObject>(value), FindObjectOfType<Canvas>().transform);

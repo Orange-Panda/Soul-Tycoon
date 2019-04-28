@@ -26,9 +26,12 @@ public class UITime : MonoBehaviour
 		GameManager.HourTick -= UpdateText;
 	}
 
+	/// <summary>
+	/// Updates the text AND updates the bar.
+	/// </summary>
 	private void UpdateText()
 	{
 		textMesh.SetText(string.Format("Day {0}", GameManager.day));
-		image.fillAmount = (float)(GameManager.hour - 1) / 23;
+		image.fillAmount = (float)GameManager.hour / 23;
 	}
 }

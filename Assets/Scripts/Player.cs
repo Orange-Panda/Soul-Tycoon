@@ -25,6 +25,10 @@ public static class Player
 		}
 	}
 
+	/// <summary>
+	/// Sets the currency to the exact value provided.
+	/// </summary>
+	/// <param name="value"></param>
 	public static void SetCurrency(int value)
 	{
 		currency = value;

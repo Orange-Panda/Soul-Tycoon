@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Automatically fills in the data for a building button.
+/// </summary>
 public class MenuBuildingAutofill : MonoBehaviour
 {
 	public BuildingProperties properties;

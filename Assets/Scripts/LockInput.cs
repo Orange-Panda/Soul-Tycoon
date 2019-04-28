@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Prevents tiles from being interacted with while active.
+/// </summary>
 public class LockInput : MonoBehaviour
 {
 	private void OnEnable()

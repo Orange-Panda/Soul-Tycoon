@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: (5) Tech Store
+  m_Name: (5) Fine Dinner
   m_EditorClassIdentifier: 
-  title: Technological Advances
-  description: We have a wide variety of heating devices, they can also be used as
-    graphics cards however.
+  title: Fine Dinner
+  description: We proudly serve angel hair pasta alongside unholy water!
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
@@ -24,18 +23,8 @@ MonoBehaviour:
   repairCost: 5000
   damagedThreshold: 0.9
   damagedMultiplier: 1.1
-  potentialDisasters:
-  - properties: {fileID: 0}
-    name: Graphics Card Overheating!
-    risk: 2
-    damageBase: 0
-    damageVariance: 300
-  - properties: {fileID: 0}
-    name: CPU Overheating!
-    risk: 2
-    damageBase: 0
-    damageVariance: 300
+  potentialDisasters: []
   yieldBase: 1650
   yieldVariance: 0
-  yieldBaseRate: 1
-  maxCurrency: 1650
+  yieldBaseRate: 2
+  maxCurrency: 25000

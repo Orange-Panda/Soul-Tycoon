@@ -24,7 +24,7 @@ MonoBehaviour:
   damagedThreshold: 0.9
   damagedMultiplier: 0.55
   potentialDisasters: []
-  yieldBase: 10000
-  yieldVariance: 90000
-  yieldBaseRate: 1
-  maxCurrency: 100000
+  yieldBase: 125000
+  yieldVariance: 0
+  yieldBaseRate: 2
+  maxCurrency: 500000

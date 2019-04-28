@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: (6) Real Estate
+  m_Name: (6) Lettuce
   m_EditorClassIdentifier: 
-  title: The Deal Estate
-  description: Contrary to popular belief, it is not free.
+  title: The Devil's Lettuce
+  description: We really only sell lettuce here.
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
@@ -26,5 +26,5 @@ MonoBehaviour:
   potentialDisasters: []
   yieldBase: 10000
   yieldVariance: 20000
-  yieldBaseRate: 1
+  yieldBaseRate: 2
   maxCurrency: 100000

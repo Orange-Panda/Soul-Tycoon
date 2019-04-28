@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
   m_Name: (4) Desserts
   m_EditorClassIdentifier: 
-  title: Devil's Desserts
+  title: Desserts
   description: 'Try our new premiere dish: lava cakes and deviled eggs! For a limited
     time get a free apple with your order!'
   icon: {fileID: 0}
