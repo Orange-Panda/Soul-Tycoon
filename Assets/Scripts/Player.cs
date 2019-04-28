@@ -11,7 +11,7 @@ public static class Player
 	/// <summary>
 	/// Adds currency to the players balance. Will never fail.
 	/// </summary>
-	public static void Deposit(uint value, Vector3 position)
+	public static void Deposit(uint value, Vector3 position, bool playSound = true)
 	{
 		currency += (int)value;
 		CurrencyValueChanged();
@@ -19,6 +19,10 @@ public static class Player
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();
 		textMesh.SetText(string.Format("+{0}", value));
 		textMesh.color = new Color(1f, 1f, 0.7f);
+		if (playSound)
+		{
+			UIManager.audioSource.PlayOneShot(Resources.Load<AudioClip>("deposit"));
+		}
 	}
 
 	public static void SetCurrency(int value)
@@ -30,7 +34,7 @@ public static class Player
 	/// <summary>
 	/// Attempts to remove currency from the player account. If they have insufficient funds will deny the withdrawal and return false.
 	/// </summary>
-	public static bool Withdraw(uint value, Vector3 position)
+	public static bool Withdraw(uint value, Vector3 position, bool playSound = true)
 	{
 		bool insufficient = currency - value < 0;
 		currency = insufficient ? currency : currency - (int)value;
@@ -39,13 +43,17 @@ public static class Player
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();
 		textMesh.SetText(string.Format(insufficient ? "Insufficient Funds!\n{1}/{0}" : "-{0}", value, currency));
 		textMesh.color = new Color(1f, 0.7f, 0.7f);
+		if (playSound)
+		{
+			UIManager.audioSource.PlayOneShot(Resources.Load<AudioClip>(insufficient ? "insufficient" : "withdraw"));
+		}
 		return !insufficient;
 	}
 
 	/// <summary>
 	/// Forcibly withdraws currency.
 	/// </summary>
-	public static void ForceWithdraw(uint value, Vector3 position)
+	public static void ForceWithdraw(uint value, Vector3 position, bool playSound = true)
 	{
 		currency -= (int)value;
 		CurrencyValueChanged();
@@ -53,5 +61,9 @@ public static class Player
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();
 		textMesh.SetText(string.Format("-{0}", value));
 		textMesh.color = new Color(1f, 0.7f, 0.7f);
+		if (playSound)
+		{
+			UIManager.audioSource.PlayOneShot(Resources.Load<AudioClip>("withdraw"));
+		}
 	}
 }

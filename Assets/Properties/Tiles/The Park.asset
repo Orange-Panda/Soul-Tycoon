@@ -17,4 +17,9 @@ MonoBehaviour:
   tilePurchaseCost: 175
   tileRentCost: 20
   traffic: 1.5
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Eruption!
+    risk: 1
+    damageBase: 1000
+    damageVariance: 0

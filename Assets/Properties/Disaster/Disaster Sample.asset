@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Disaster Sample
   m_EditorClassIdentifier: 
   disasterSprite: {fileID: 0}
-  disasterTitle: Disaster!
+  disasterTitle: Disaster
   disasterDescription: Things have gone wrong!

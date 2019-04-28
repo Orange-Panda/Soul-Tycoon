@@ -19,6 +19,7 @@ MonoBehaviour:
   traffic: 1
   environmentalDisaster:
   - properties: {fileID: 11400000, guid: 08964a3a682ee094d93591b08ddcfffc, type: 2}
+    name: Defaced
     risk: 1
-    damageBase: 250
+    damageBase: 300
     damageVariance: 0

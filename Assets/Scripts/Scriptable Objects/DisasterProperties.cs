@@ -27,14 +27,22 @@ public struct BuildingDistaster
 	/// Metadata for the disaster.
 	/// </summary>
 	public DisasterProperties properties;
+
+	/// <summary>
+	/// Title of the disaster.
+	/// </summary>
+	public string name;
+
 	/// <summary>
 	/// Probability of the disaster occuring.
 	/// </summary>
 	public Risk risk;
+
 	/// <summary>
 	/// Base amount of damage dealt.
 	/// </summary>
 	public uint damageBase;
+
 	/// <summary>
 	/// Potential damage added to the base.
 	/// </summary>

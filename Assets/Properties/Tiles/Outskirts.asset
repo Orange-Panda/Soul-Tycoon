@@ -17,4 +17,9 @@ MonoBehaviour:
   tilePurchaseCost: 500
   tileRentCost: 45
   traffic: 1.75
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Sandstorm
+    risk: 1
+    damageBase: 0
+    damageVariance: 100

@@ -11,7 +11,7 @@ public class ProductionBuilding : MonoBehaviour
 	public uint heldCurrency;
 	public bool powered = true;
 	public int durability = 100;
-	private ParticleSystem productionParticles;
+	private ParticleSystem productionParticles, smokeParticles;
 	private Color standard = new Color(1, 0.9f, 0.5f);
 	private Color broken = new Color(0.25f, 0.22f, 0.125f);
 
@@ -19,7 +19,7 @@ public class ProductionBuilding : MonoBehaviour
 	{
 		get
 		{
-			if (durability < 0) return 0;
+			if (durability <= 0) return 0;
 			return durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier;
 		}
 	}
@@ -28,6 +28,10 @@ public class ProductionBuilding : MonoBehaviour
 	{
 		tile = GetComponent<Tile>();
 		productionParticles = GetComponent<ParticleSystem>();
+		smokeParticles = tile.buildingSprite.GetComponent<ParticleSystem>();
+		productionParticles.Play();
+		smokeParticles.Emit(5);
+		smokeParticles.Stop();
 	}
 
 	public void InitializeBuilding(ProductionProperties properties)
@@ -50,7 +54,7 @@ public class ProductionBuilding : MonoBehaviour
 
 	private void GameManager_HourTick()
 	{
-		yieldProgress += (thisBuilding.yieldBaseRate * tile.properties.traffic * DurabilityYieldModifier) / 24;
+		yieldProgress += powered ? (thisBuilding.yieldBaseRate * tile.properties.traffic * DurabilityYieldModifier) / 24 : 0;
 
 		while(yieldProgress >= 1)
 		{
@@ -75,15 +79,18 @@ public class ProductionBuilding : MonoBehaviour
 		{
 			if(durability > 0 && SoulTycoon.AttemptRisk(disaster.risk))
 			{
-				var main = productionParticles.main;
-				main.startColor = Color.Lerp(broken, standard, Mathf.Max(durability / thisBuilding.durability, 0));
-				productionParticles.Emit(30);
+				smokeParticles.Emit(15);
 				int damageDealt = (int)SoulTycoon.VariableValue(disaster.damageBase, disaster.damageVariance);
 				durability -= damageDealt;
+				if (durability < 0)
+				{
+					smokeParticles.Play();
+				}
 				GameObject go = Instantiate(Resources.Load<GameObject>("Disaster"), transform.position - new Vector3(0, 0, 1), Quaternion.identity);
 				TMPro.TextMeshPro textMesh = go.GetComponent<TMPro.TextMeshPro>();
-				textMesh.SetText(string.Format("{0}!\nIntegrity {2}%", disaster.properties.disasterTitle, damageDealt, Mathf.Max(durability / thisBuilding.durability * 100, 0).ToString("N")));
+				textMesh.SetText(string.Format("{0}!\nIntegrity {2}%", disaster.name, damageDealt, Mathf.Max((float)durability / thisBuilding.durability * 100, 0).ToString("N1")));
 				textMesh.color = new Color(1f, 0.7f, 0.7f);
+				break;
 			}
 		}
 	}
@@ -95,6 +102,7 @@ public class ProductionBuilding : MonoBehaviour
 			durability = (int)thisBuilding.durability;
 			var main = productionParticles.main;
 			main.startColor	= standard;
+			smokeParticles.Stop();
 		}
 	}
 
@@ -102,7 +110,7 @@ public class ProductionBuilding : MonoBehaviour
 	{
 		heldCurrency = (uint)Mathf.Min(thisBuilding.maxCurrency, heldCurrency + SoulTycoon.VariableValue(thisBuilding.yieldBase, thisBuilding.yieldVariance));
 		var emission = productionParticles.emission;
-		emission.rateOverTime = new ParticleSystem.MinMaxCurve(Mathf.Log(heldCurrency, 1.25f));
+		emission.rateOverTime = new ParticleSystem.MinMaxCurve(Mathf.Log(heldCurrency, 1.3f) + 3);
 	}
 
 	public bool GatherCurrency()
@@ -112,7 +120,7 @@ public class ProductionBuilding : MonoBehaviour
 			Player.Deposit(heldCurrency, transform.position);
 			heldCurrency = 0;
 			var emission = productionParticles.emission;
-			emission.rateOverTime = new ParticleSystem.MinMaxCurve(durability / thisBuilding.durability < 0 ? 30 : 0);
+			emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
 			productionParticles.Emit(30);
 			return true;
 		}

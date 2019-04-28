@@ -10,21 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: Production Building 13
+  m_Name: (3) Molt-N-Rocks
   m_EditorClassIdentifier: 
-  title: Building
-  description: Does some cool stuff
+  title: Molt-N-Rocks
+  description: You couldn't be any more correct when saying our products rock!
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
-  cost: 10
-  value: 5
-  durability: 100
-  repairCost: 5
-  damagedThreshold: 0.2
-  damagedMultiplier: 0.5
-  potentialDisasters: []
-  yieldBase: 4
-  yieldVariance: 2
-  yieldBaseRate: 5
+  cost: 100
+  value: 10
+  durability: 60
+  repairCost: 10
+  damagedThreshold: 0.9
+  damagedMultiplier: 2
+  potentialDisasters:
+  - properties: {fileID: 0}
+    name: Explosion
+    risk: 1
+    damageBase: 100
+    damageVariance: 0
+  yieldBase: 20
+  yieldVariance: 30
+  yieldBaseRate: 4
   maxCurrency: 100

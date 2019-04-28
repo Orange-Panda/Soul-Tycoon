@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: Residental
+  m_Script: {fileID: 11500000, guid: 6b921f89819652941b84d37697966ccc, type: 3}
+  m_Name: Out of Supplies
   m_EditorClassIdentifier: 
-  tileName: Resedential
-  tileType: 1
-  tilePurchaseCost: 750
-  tileRentCost: 50
-  traffic: 1
-  environmentalDisaster: []
+  disasterSprite: {fileID: 0}
+  disasterTitle: Out of Supplies
+  disasterDescription: The building

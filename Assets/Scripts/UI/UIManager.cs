@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+	public static AudioSource audioSource;
+
+	private void Start()
+	{
+		audioSource = GetComponent<AudioSource>();
+	}
+
 	/// <summary>
 	/// Destroy the gameObject for a bit of currency.
 	/// </summary>
@@ -13,6 +20,7 @@ public class UIManager : MonoBehaviour
 	{
 		Player.SetCurrency(1);
 		GameManager.SetGameSpeed(GameSpeed.Standard);
+		audioSource.PlayOneShot(Resources.Load<AudioClip>("small-click"));
 		Destroy(gameObject);
 	}
 
@@ -22,6 +30,7 @@ public class UIManager : MonoBehaviour
 	public void SetGameSpeed(int gameSpeed)
 	{
 		GameManager.SetGameSpeed((GameSpeed)gameSpeed);
+		audioSource.PlayOneShot(Resources.Load<AudioClip>("small-click"));
 	}
 
 	/// <summary>
@@ -30,5 +39,6 @@ public class UIManager : MonoBehaviour
 	public void SetScene(int index)
 	{
 		SceneManager.LoadScene(index);
+		audioSource.PlayOneShot(Resources.Load<AudioClip>("small-click"));
 	}
 }

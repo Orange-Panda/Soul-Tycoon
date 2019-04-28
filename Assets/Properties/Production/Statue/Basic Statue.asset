@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Basic Statue
   m_EditorClassIdentifier: 
   title: Basic Statue
-  description: Passively generates a minor amount of currency.
+  description: Passively generates a minor amount of souls. Souls are ready to be
+    collected when glowing.
   icon: {fileID: 21300000, guid: 38ab5d7dce89c3146931e1dfb20f65cf, type: 3}
   sprite: {fileID: 21300000, guid: 38ab5d7dce89c3146931e1dfb20f65cf, type: 3}
   starter: 1
   cost: 0
   value: 0
-  durability: 1000
+  durability: 250
   repairCost: 0
   damagedThreshold: 0
   damagedMultiplier: 1
   potentialDisasters: []
-  yieldBase: 2
-  yieldVariance: 1
-  yieldBaseRate: 12
-  maxCurrency: 25
+  yieldBase: 1
+  yieldVariance: 4
+  yieldBaseRate: 16
+  maxCurrency: 10

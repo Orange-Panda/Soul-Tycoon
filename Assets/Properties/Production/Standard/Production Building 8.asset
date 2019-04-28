@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
-  cost: 10
+  cost: 12500
   value: 5
   durability: 100
   repairCost: 5

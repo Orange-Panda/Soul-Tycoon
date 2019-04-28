@@ -17,4 +17,19 @@ MonoBehaviour:
   tilePurchaseCost: 2500
   tileRentCost: 250
   traffic: 2.75
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Power Outage
+    risk: 1
+    damageBase: 10
+    damageVariance: 100
+  - properties: {fileID: 0}
+    name: Robbery
+    risk: 1
+    damageBase: 100
+    damageVariance: 200
+  - properties: {fileID: 0}
+    name: Sabotage
+    risk: 1
+    damageBase: 500
+    damageVariance: 0

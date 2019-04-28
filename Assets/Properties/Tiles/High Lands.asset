@@ -17,4 +17,9 @@ MonoBehaviour:
   tilePurchaseCost: 12500
   tileRentCost: 1250
   traffic: 4
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Landslide
+    risk: 1
+    damageBase: 10000
+    damageVariance: 0

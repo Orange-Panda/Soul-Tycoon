@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Golden Statue
   m_EditorClassIdentifier: 
   title: Building
-  description: Passively generates an absurd amount of currency
+  description: Passively generates an absurd amount of souls. Souls are ready to be
+    collected when glowing.
   icon: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
   sprite: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
   starter: 1
@@ -24,7 +25,7 @@ MonoBehaviour:
   damagedThreshold: 0
   damagedMultiplier: 1
   potentialDisasters: []
-  yieldBase: 25000
-  yieldVariance: 50000
-  yieldBaseRate: 24
-  maxCurrency: 5000000
+  yieldBase: 1000000
+  yieldVariance: 0
+  yieldBaseRate: 3
+  maxCurrency: 1000000

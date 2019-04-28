@@ -19,6 +19,12 @@ MonoBehaviour:
   traffic: 2
   environmentalDisaster:
   - properties: {fileID: 11400000, guid: 49cd5bb2dccfd9b4786ccc8fc7bde94e, type: 2}
+    name: Sabotage
     risk: 3
-    damageBase: 30
+    damageBase: 15
     damageVariance: 25
+  - properties: {fileID: 0}
+    name: Robbery
+    risk: 1
+    damageBase: 100
+    damageVariance: 0

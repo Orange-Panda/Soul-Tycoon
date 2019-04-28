@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: Production Building 12
+  m_Name: (2) Tony's T-Shirt
   m_EditorClassIdentifier: 
-  title: Building
-  description: Does some cool stuff
+  title: Tony's T-Shirt Temple
+  description: You wouldn't want to be caught dead wearing any other T-Shirt.
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
-  cost: 10
+  cost: 25
   value: 5
-  durability: 100
+  durability: 50
   repairCost: 5
   damagedThreshold: 0.2
   damagedMultiplier: 0.5
   potentialDisasters: []
-  yieldBase: 4
-  yieldVariance: 2
-  yieldBaseRate: 5
-  maxCurrency: 100
+  yieldBase: 12
+  yieldVariance: 8
+  yieldBaseRate: 8
+  maxCurrency: 50

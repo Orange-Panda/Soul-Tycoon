@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
 	{
 		if (purchased && GetComponent<ProductionBuilding>())
 		{
-			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost, transform.position);
+			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost, transform.position, false);
 		}
 	}
 

@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Premium Statue
   m_EditorClassIdentifier: 
   title: Premium Statue
-  description: Passively gnerates a large amount of currency.
+  description: Passively gnerates a large amount of souls. Souls are ready to be collected
+    when glowing.
   icon: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
   sprite: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
   starter: 1
   cost: 50000
   value: 50000
-  durability: 1000
+  durability: 750
   repairCost: 0
   damagedThreshold: 0
   damagedMultiplier: 1
   potentialDisasters: []
-  yieldBase: 100
-  yieldVariance: 50
-  yieldBaseRate: 24
-  maxCurrency: 15000
+  yieldBase: 7500
+  yieldVariance: 0
+  yieldBaseRate: 6
+  maxCurrency: 7500

@@ -17,4 +17,14 @@ MonoBehaviour:
   tilePurchaseCost: 10
   tileRentCost: 2
   traffic: 1.25
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Fire
+    risk: 1
+    damageBase: 0
+    damageVariance: 30
+  - properties: {fileID: 0}
+    name: Crash
+    risk: 1
+    damageBase: 50
+    damageVariance: 10
