@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 	public static uint day = 1;
 	Coroutine hourCycle;
 	public static GameSpeed gameSpeed = GameSpeed.Paused;
+	GameManager instance;
 
 	public delegate void TimeEvent();
 	public static event TimeEvent HourTick = delegate { };
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
 	{
 		SetGameSpeed(GameSpeed.Paused);
 		hourCycle = StartCoroutine(HourCycle());
+		instance = this;
 	}
 
 	/// <summary>

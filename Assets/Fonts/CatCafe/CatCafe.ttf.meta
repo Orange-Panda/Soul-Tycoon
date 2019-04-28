@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dbf5fdb853886634b9d6832fb5513a31
+guid: 6dac0e9979466b6498e3d32c8b4b6a81
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Sewstain
+  fontName: CatCafe
   fontNames:
-  - Sewstain
+  - CatCafe
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Defaced
   m_EditorClassIdentifier: 
   disasterSprite: {fileID: 0}
-  disasterTitle: Meltdown
+  disasterTitle: Defaced
   disasterDescription: The building

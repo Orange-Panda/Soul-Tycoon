@@ -78,14 +78,19 @@ public class ProductionBuilding : MonoBehaviour
 				var main = productionParticles.main;
 				main.startColor = Color.Lerp(broken, standard, Mathf.Max(durability / thisBuilding.durability, 0));
 				productionParticles.Emit(30);
-				durability -= (int)SoulTycoon.VariableValue(disaster.damageBase, disaster.damageVariance);
+				int damageDealt = (int)SoulTycoon.VariableValue(disaster.damageBase, disaster.damageVariance);
+				durability -= damageDealt;
+				GameObject go = Instantiate(Resources.Load<GameObject>("Disaster"), transform.position - new Vector3(0, 0, 1), Quaternion.identity);
+				TMPro.TextMeshPro textMesh = go.GetComponent<TMPro.TextMeshPro>();
+				textMesh.SetText(string.Format("{0}!\nIntegrity {2}%", disaster.properties.disasterTitle, damageDealt, Mathf.Max(durability / thisBuilding.durability * 100, 0).ToString("N")));
+				textMesh.color = new Color(1f, 0.7f, 0.7f);
 			}
 		}
 	}
 
 	internal void AttemptRepair()
 	{
-		if(Player.Withdraw((uint)Mathf.CeilToInt(Mathf.Abs(Mathf.Max(durability, 0) / thisBuilding.durability - 1) * thisBuilding.repairCost)))
+		if(Player.Withdraw((uint)Mathf.CeilToInt(Mathf.Abs(Mathf.Max(durability, 0) / thisBuilding.durability - 1) * thisBuilding.repairCost), transform.position))
 		{
 			durability = (int)thisBuilding.durability;
 			var main = productionParticles.main;
@@ -104,7 +109,7 @@ public class ProductionBuilding : MonoBehaviour
 	{
 		if(heldCurrency > 0)
 		{
-			Player.Deposit(heldCurrency);
+			Player.Deposit(heldCurrency, transform.position);
 			heldCurrency = 0;
 			var emission = productionParticles.emission;
 			emission.rateOverTime = new ParticleSystem.MinMaxCurve(durability / thisBuilding.durability < 0 ? 30 : 0);

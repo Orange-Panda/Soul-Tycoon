@@ -15,7 +15,7 @@ public class Tile : MonoBehaviour
 
 	internal bool PurchaseBuilding(ProductionProperties properties)
 	{
-		if(building == null && Player.Withdraw(properties.cost))
+		if(building == null && Player.Withdraw(properties.cost, transform.position))
 		{
 			building = properties;
 			buildingSprite.sprite = building.sprite;
@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour
 	internal void Sell()
 	{
 		buildingSprite.sprite = null;
-		Player.Deposit(building.value);
+		Player.Deposit(building.value, transform.position);
 		building = null;
 		Destroy(GetComponent<ProductionBuilding>());
 	}
@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
 	{
 		if (purchased && GetComponent<ProductionBuilding>())
 		{
-			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost);
+			GetComponent<ProductionBuilding>().powered = Player.Withdraw(properties.tileRentCost, transform.position);
 		}
 	}
 
@@ -87,7 +87,7 @@ public class Tile : MonoBehaviour
 
 		if (!purchased)
 		{
-			if (Player.Withdraw(properties.tilePurchaseCost))
+			if (Player.Withdraw(properties.tilePurchaseCost, transform.position))
 			{
 				purchased = true;
 				fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
