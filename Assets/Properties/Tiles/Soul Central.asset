@@ -17,4 +17,8 @@ MonoBehaviour:
   tilePurchaseCost: 1
   tileRentCost: 0
   traffic: 1
-  environmentalDisaster: []
+  environmentalDisaster:
+  - properties: {fileID: 11400000, guid: 08964a3a682ee094d93591b08ddcfffc, type: 2}
+    risk: 1
+    damageBase: 250
+    damageVariance: 0

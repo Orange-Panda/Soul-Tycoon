@@ -9,9 +9,9 @@ public static class SoulTycoon
 	public static Dictionary<Risk, float> riskProbability = new Dictionary<Risk, float>()
 	{
 		{ Risk.Protected, 0.00f },
-		{ Risk.Low, 0.01f },
-		{ Risk.Medium, 0.025f },
-		{ Risk.High, 0.05f },
+		{ Risk.Low, 0.005f },
+		{ Risk.Medium, 0.01f },
+		{ Risk.High, 0.025f },
 		{ Risk.Definite, 1f }
 	};
 

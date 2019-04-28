@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Building
   description: Passively generates an absurd amount of currency
-  icon: {fileID: 0}
-  starter: 0
+  icon: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
+  sprite: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
+  starter: 1
   cost: 10000000
   value: 10000000
   durability: 1000
@@ -23,7 +24,7 @@ MonoBehaviour:
   damagedThreshold: 0
   damagedMultiplier: 1
   potentialDisasters: []
-  yieldBase: 250000
-  yieldVariance: 0
+  yieldBase: 25000
+  yieldVariance: 50000
   yieldBaseRate: 24
   maxCurrency: 5000000

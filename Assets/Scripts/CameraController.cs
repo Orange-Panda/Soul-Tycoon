@@ -20,13 +20,17 @@ public class CameraController : MonoBehaviour
 			transform.Translate(input * Time.unscaledDeltaTime * mainCamera.orthographicSize * 2f, Space.Self);
 		}
 
-		mainCamera.orthographicSize = Mathf.Max(2, Mathf.Min(mainCamera.orthographicSize + Input.mouseScrollDelta.y * -1 / 3, 15));
+		if (Tile.inputEnabled)
+		{
+			mainCamera.orthographicSize = Mathf.Max(2, Mathf.Min(mainCamera.orthographicSize + Input.mouseScrollDelta.y * -1 / 3, 15));
+		}
 
-		if (Input.GetKeyDown(KeyCode.Escape) || Mathf.Abs(transform.position.x) > 22 || Mathf.Abs(transform.position.y) > 14)
+		if (Input.GetKeyDown(KeyCode.Escape) || Mathf.Abs(transform.position.x) > 28 || Mathf.Abs(transform.position.y) > 18)
 		{
 			StopAllCoroutines();
 			StartCoroutine(TravelToPosition(new Vector3(0, 0, -10f)));
 		}
+
 		if (Input.GetKeyDown(KeyCode.Mouse2))
 		{
 			StopAllCoroutines();

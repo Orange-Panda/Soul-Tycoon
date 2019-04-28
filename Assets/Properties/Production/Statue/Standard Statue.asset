@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Standard Statue
   description: Passively generates a moderate amount of currency.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f959a17e381a750408eb3751985001ad, type: 3}
+  sprite: {fileID: 21300000, guid: f959a17e381a750408eb3751985001ad, type: 3}
   starter: 1
   cost: 1000
   value: 1000
@@ -23,7 +24,7 @@ MonoBehaviour:
   damagedThreshold: 0
   damagedMultiplier: 1
   potentialDisasters: []
-  yieldBase: 5
+  yieldBase: 10
   yieldVariance: 5
-  yieldBaseRate: 10
+  yieldBaseRate: 12
   maxCurrency: 250

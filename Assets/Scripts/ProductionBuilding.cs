@@ -11,11 +11,15 @@ public class ProductionBuilding : MonoBehaviour
 	public uint heldCurrency;
 	public bool powered = true;
 	public int durability = 100;
+	private ParticleSystem productionParticles;
+	private Color standard = new Color(1, 0.9f, 0.5f);
+	private Color broken = new Color(0.25f, 0.22f, 0.125f);
 
 	public float DurabilityYieldModifier
 	{
 		get
 		{
+			if (durability < 0) return 0;
 			return durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier;
 		}
 	}
@@ -23,6 +27,13 @@ public class ProductionBuilding : MonoBehaviour
 	private void Start()
 	{
 		tile = GetComponent<Tile>();
+		productionParticles = GetComponent<ParticleSystem>();
+	}
+
+	public void InitializeBuilding(ProductionProperties properties)
+	{
+		thisBuilding = properties;
+		durability = (int)properties.durability;
 	}
 
 	private void OnEnable()
@@ -57,12 +68,16 @@ public class ProductionBuilding : MonoBehaviour
 
 	private void CheckForDisaster()
 	{
-		List<BuildingDistaster> disasters = thisBuilding.potentialDisasters;
+		List<BuildingDistaster> disasters = new List<BuildingDistaster>();
+		disasters.AddRange(thisBuilding.potentialDisasters);
 		disasters.AddRange(tile.properties.environmentalDisaster);
 		foreach(BuildingDistaster disaster in disasters)
 		{
-			if(SoulTycoon.AttemptRisk(disaster.risk))
+			if(durability > 0 && SoulTycoon.AttemptRisk(disaster.risk))
 			{
+				var main = productionParticles.main;
+				main.startColor = Color.Lerp(broken, standard, Mathf.Max(durability / thisBuilding.durability, 0));
+				productionParticles.Emit(30);
 				durability -= (int)SoulTycoon.VariableValue(disaster.damageBase, disaster.damageVariance);
 			}
 		}
@@ -70,15 +85,19 @@ public class ProductionBuilding : MonoBehaviour
 
 	internal void AttemptRepair()
 	{
-		if(Player.Withdraw((uint)Mathf.CeilToInt(Mathf.Max(durability, 0) / thisBuilding.durability * thisBuilding.repairCost)))
+		if(Player.Withdraw((uint)Mathf.CeilToInt(Mathf.Abs(Mathf.Max(durability, 0) / thisBuilding.durability - 1) * thisBuilding.repairCost)))
 		{
 			durability = (int)thisBuilding.durability;
+			var main = productionParticles.main;
+			main.startColor	= standard;
 		}
 	}
 
 	private void YieldCurrency()
 	{
-		heldCurrency = (uint)Mathf.Min(thisBuilding.maxCurrency, SoulTycoon.VariableValue(thisBuilding.yieldBase, thisBuilding.yieldVariance));
+		heldCurrency = (uint)Mathf.Min(thisBuilding.maxCurrency, heldCurrency + SoulTycoon.VariableValue(thisBuilding.yieldBase, thisBuilding.yieldVariance));
+		var emission = productionParticles.emission;
+		emission.rateOverTime = new ParticleSystem.MinMaxCurve(Mathf.Log(heldCurrency, 1.25f));
 	}
 
 	public bool GatherCurrency()
@@ -87,6 +106,9 @@ public class ProductionBuilding : MonoBehaviour
 		{
 			Player.Deposit(heldCurrency);
 			heldCurrency = 0;
+			var emission = productionParticles.emission;
+			emission.rateOverTime = new ParticleSystem.MinMaxCurve(durability / thisBuilding.durability < 0 ? 30 : 0);
+			productionParticles.Emit(30);
 			return true;
 		}
 		else

@@ -11,6 +11,7 @@ public abstract class BuildingProperties : ScriptableObject
 	[TextArea]
 	public string description = "Does some cool stuff";
 	public Sprite icon;
+	public Sprite sprite;
 	public bool starter = false;
 
 	[Header("Building Properties")]

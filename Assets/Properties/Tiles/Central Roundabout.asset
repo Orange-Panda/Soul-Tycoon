@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileName: Main Square
   tileType: 1
-  tilePurchaseCost: 125
-  tileRentCost: 10
-  traffic: 2
+  tilePurchaseCost: 10
+  tileRentCost: 2
+  traffic: 1.25
   environmentalDisaster: []

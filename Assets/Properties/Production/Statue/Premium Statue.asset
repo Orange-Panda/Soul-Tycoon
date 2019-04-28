@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Premium Statue
   description: Passively gnerates a large amount of currency.
-  icon: {fileID: 0}
-  starter: 0
+  icon: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
+  sprite: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
+  starter: 1
   cost: 50000
   value: 50000
   durability: 1000

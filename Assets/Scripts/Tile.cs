@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -12,14 +13,38 @@ public class Tile : MonoBehaviour
 	public static bool inputEnabled = true;
 	public BuildingProperties building;
 
-	private void Start()
+	internal bool PurchaseBuilding(ProductionProperties properties)
+	{
+		if(building == null && Player.Withdraw(properties.cost))
+		{
+			building = properties;
+			buildingSprite.sprite = building.sprite;
+			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
+			production.InitializeBuilding(properties);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	internal void Sell()
+	{
+		buildingSprite.sprite = null;
+		Player.Deposit(building.value);
+		building = null;
+		Destroy(GetComponent<ProductionBuilding>());
+	}
+
+	private void OnEnable()
 	{
 		if (properties == null)
 		{
 			border.color = new Color(0.3f, 0.3f, 0.3f, 1f);
 			fill.color = new Color(0.3f, 0f, 0f, 1f);
 			textMesh.SetText("");
-			Destroy(this);
+			enabled = false;
 		}
 		else
 		{
@@ -27,10 +52,7 @@ public class Tile : MonoBehaviour
 			fill.color = Color.black;
 			textMesh.SetText(properties.tilePurchaseCost.ToString());
 		}
-	}
 
-	private void OnEnable()
-	{
 		GameManager.DayTick += GameManager_DayTick;
 	}
 
@@ -81,12 +103,19 @@ public class Tile : MonoBehaviour
 		{
 			if(!productionBuilding.GatherCurrency())
 			{
-				//TODO: Create utilities menu.
+				CreateMenu("Modify");
 			}
 		}
 		else
 		{
-			//TODO: Create buy menu.
+			CreateMenu(properties.tileType.ToString());
 		}
+	}
+
+
+	private void CreateMenu(string value)
+	{
+		GameObject buyPanel = Instantiate(Resources.Load<GameObject>(value), FindObjectOfType<Canvas>().transform);
+		buyPanel.GetComponent<MenuChoice>().targetTile = this;
 	}
 }
