@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Tony's T-Shirt Temple
   description: You wouldn't want to be caught dead wearing any other T-Shirt.
-  icon: {fileID: 0}
-  sprite: {fileID: 0}
+  icon: {fileID: 21300000, guid: e94337ae70f7bce489e93a84b4f3de29, type: 3}
+  sprite: {fileID: 21300000, guid: e94337ae70f7bce489e93a84b4f3de29, type: 3}
   starter: 0
   cost: 25
-  value: 5
+  value: 15
   durability: 50
-  repairCost: 5
-  damagedThreshold: 0.2
-  damagedMultiplier: 0.5
+  repairCost: 10
+  damagedThreshold: 0
+  damagedMultiplier: 1
   potentialDisasters: []
   yieldBase: 12
   yieldVariance: 8

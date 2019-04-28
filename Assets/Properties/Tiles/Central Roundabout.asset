@@ -24,7 +24,7 @@ MonoBehaviour:
     damageBase: 0
     damageVariance: 30
   - properties: {fileID: 0}
-    name: Crash
+    name: Earthquake
     risk: 1
     damageBase: 50
     damageVariance: 10

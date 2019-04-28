@@ -15,12 +15,20 @@ public class ProductionBuilding : MonoBehaviour
 	private Color standard = new Color(1, 0.9f, 0.5f);
 	private Color broken = new Color(0.25f, 0.22f, 0.125f);
 
+	public uint RepairCost
+	{
+		get
+		{
+			return (uint)Mathf.CeilToInt(Mathf.Abs((float)durability / thisBuilding.durability - 1) * thisBuilding.repairCost);
+		}
+	}
+
 	public float DurabilityYieldModifier
 	{
 		get
 		{
 			if (durability <= 0) return 0;
-			return durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier;
+			return (float)durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier;
 		}
 	}
 
@@ -81,8 +89,8 @@ public class ProductionBuilding : MonoBehaviour
 			{
 				smokeParticles.Emit(15);
 				int damageDealt = (int)SoulTycoon.VariableValue(disaster.damageBase, disaster.damageVariance);
-				durability -= damageDealt;
-				if (durability < 0)
+				durability = Mathf.Max(durability - damageDealt, 0);
+				if (durability <= 0)
 				{
 					smokeParticles.Play();
 				}
@@ -97,7 +105,7 @@ public class ProductionBuilding : MonoBehaviour
 
 	internal void AttemptRepair()
 	{
-		if(Player.Withdraw((uint)Mathf.CeilToInt(Mathf.Abs(Mathf.Max(durability, 0) / thisBuilding.durability - 1) * thisBuilding.repairCost), transform.position))
+		if(Player.Withdraw(RepairCost, transform.position))
 		{
 			durability = (int)thisBuilding.durability;
 			var main = productionParticles.main;

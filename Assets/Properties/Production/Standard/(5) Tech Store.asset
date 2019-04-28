@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
+  m_Name: (5) Tech Store
+  m_EditorClassIdentifier: 
+  title: Technological Advances
+  description: We have a wide variety of heating devices, they can also be used as
+    graphics cards however.
+  icon: {fileID: 0}
+  sprite: {fileID: 0}
+  starter: 0
+  cost: 7500
+  value: 2500
+  durability: 400
+  repairCost: 5000
+  damagedThreshold: 0.9
+  damagedMultiplier: 1.1
+  potentialDisasters:
+  - properties: {fileID: 0}
+    name: Graphics Card Overheating!
+    risk: 2
+    damageBase: 0
+    damageVariance: 300
+  - properties: {fileID: 0}
+    name: CPU Overheating!
+    risk: 2
+    damageBase: 0
+    damageVariance: 300
+  yieldBase: 1650
+  yieldVariance: 0
+  yieldBaseRate: 1
+  maxCurrency: 1650

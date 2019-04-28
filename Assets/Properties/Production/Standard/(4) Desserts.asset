@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
+  m_Name: (4) Desserts
+  m_EditorClassIdentifier: 
+  title: Devil's Desserts
+  description: 'Try our new premiere dish: lava cakes and deviled eggs! For a limited
+    time get a free apple with your order!'
+  icon: {fileID: 0}
+  sprite: {fileID: 0}
+  starter: 0
+  cost: 1250
+  value: 500
+  durability: 150
+  repairCost: 750
+  damagedThreshold: 0.9
+  damagedMultiplier: 0.5
+  potentialDisasters:
+  - properties: {fileID: 0}
+    name: Oven Fire
+    risk: 1
+    damageBase: 0
+    damageVariance: 100
+  - properties: {fileID: 0}
+    name: Food Poisoning
+    risk: 1
+    damageBase: 0
+    damageVariance: 250
+  yieldBase: 200
+  yieldVariance: 100
+  yieldBaseRate: 2
+  maxCurrency: 666

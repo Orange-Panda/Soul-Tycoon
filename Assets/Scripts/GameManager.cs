@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
 		{ GameSpeed.Paused, 0.01f },
 		{ GameSpeed.Slow, 0.55f },
 		{ GameSpeed.Standard, 1f },
-		{ GameSpeed.Fast, 2f },
-		{ GameSpeed.VeryFast, 4f },
+		{ GameSpeed.Fast, 1.5f },
+		{ GameSpeed.VeryFast, 2f },
 	};
 
 	/// <summary>

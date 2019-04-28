@@ -15,8 +15,8 @@ MonoBehaviour:
   title: Premium Statue
   description: Passively gnerates a large amount of souls. Souls are ready to be collected
     when glowing.
-  icon: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
-  sprite: {fileID: 21300000, guid: 16f58cd4e308ca148987381efb0a5c15, type: 3}
+  icon: {fileID: 21300000, guid: c96feb5f91a0c1f4da657f771bc37663, type: 3}
+  sprite: {fileID: 21300000, guid: c96feb5f91a0c1f4da657f771bc37663, type: 3}
   starter: 1
   cost: 50000
   value: 50000

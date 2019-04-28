@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class UICurrency : MonoBehaviour
 {
-	public string prefix = "$";
+	private string prefix = "";
 	private int displayValue;
 	private TextMeshProUGUI textMesh;
 

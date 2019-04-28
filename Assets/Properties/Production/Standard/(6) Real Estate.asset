@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: Production Building 7
+  m_Name: (6) Real Estate
   m_EditorClassIdentifier: 
-  title: Building
-  description: Does some cool stuff
+  title: The Deal Estate
+  description: Contrary to popular belief, it is not free.
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
-  cost: 7500
-  value: 5
-  durability: 100
-  repairCost: 5
+  cost: 50000
+  value: 25000
+  durability: 750
+  repairCost: 25000
   damagedThreshold: 0.2
   damagedMultiplier: 0.5
   potentialDisasters: []
-  yieldBase: 4
-  yieldVariance: 2
-  yieldBaseRate: 5
-  maxCurrency: 100
+  yieldBase: 10000
+  yieldVariance: 20000
+  yieldBaseRate: 1
+  maxCurrency: 100000

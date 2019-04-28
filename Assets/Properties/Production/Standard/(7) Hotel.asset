@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
-  m_Name: Production Building 10
+  m_Name: (7) Hotel
   m_EditorClassIdentifier: 
   title: Hotel California
-  description: Does some cool stuff
+  description: '...'
   icon: {fileID: 0}
   sprite: {fileID: 0}
   starter: 0
-  cost: 125000
-  value: 5
-  durability: 100
-  repairCost: 5
-  damagedThreshold: 0.2
-  damagedMultiplier: 0.5
+  cost: 250000
+  value: 125000
+  durability: 1000
+  repairCost: 50000
+  damagedThreshold: 0.9
+  damagedMultiplier: 0.55
   potentialDisasters: []
   yieldBase: 10000
   yieldVariance: 90000
-  yieldBaseRate: 2
+  yieldBaseRate: 1
   maxCurrency: 100000

@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Demonade Stand
   description: Great for cooling down during those hot days.
-  icon: {fileID: 0}
-  sprite: {fileID: 0}
+  icon: {fileID: 21300000, guid: acf7f38441f4cbc47bab776c27692e4f, type: 3}
+  sprite: {fileID: 21300000, guid: acf7f38441f4cbc47bab776c27692e4f, type: 3}
   starter: 0
   cost: 5
-  value: 1
+  value: 0
   durability: 1
   repairCost: 1
-  damagedThreshold: 0.2
-  damagedMultiplier: 0.5
+  damagedThreshold: 0
+  damagedMultiplier: 1
   potentialDisasters:
   - properties: {fileID: 0}
     name: Out of Supplies

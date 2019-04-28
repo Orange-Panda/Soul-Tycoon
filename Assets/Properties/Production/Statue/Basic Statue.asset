@@ -15,8 +15,8 @@ MonoBehaviour:
   title: Basic Statue
   description: Passively generates a minor amount of souls. Souls are ready to be
     collected when glowing.
-  icon: {fileID: 21300000, guid: 38ab5d7dce89c3146931e1dfb20f65cf, type: 3}
-  sprite: {fileID: 21300000, guid: 38ab5d7dce89c3146931e1dfb20f65cf, type: 3}
+  icon: {fileID: 21300000, guid: 9bd8410fd4faef448a38d89c2955648e, type: 3}
+  sprite: {fileID: 21300000, guid: 9bd8410fd4faef448a38d89c2955648e, type: 3}
   starter: 1
   cost: 0
   value: 0

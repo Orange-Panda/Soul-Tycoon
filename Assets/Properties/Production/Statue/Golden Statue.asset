@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b25c8a8baf6fca4c83fe2e0834fc4be, type: 3}
   m_Name: Golden Statue
   m_EditorClassIdentifier: 
-  title: Building
+  title: Golden Statue
   description: Passively generates an absurd amount of souls. Souls are ready to be
     collected when glowing.
-  icon: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
-  sprite: {fileID: 21300000, guid: 57b6b871c32831a4f9a5330210354124, type: 3}
+  icon: {fileID: 21300000, guid: afe3651fed6ea154f9f21a18e6f5d3a7, type: 3}
+  sprite: {fileID: 21300000, guid: afe3651fed6ea154f9f21a18e6f5d3a7, type: 3}
   starter: 1
   cost: 10000000
   value: 10000000
