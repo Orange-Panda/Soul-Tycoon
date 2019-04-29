@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Fine Dinner
   description: We proudly serve angel hair pasta alongside unholy water!
-  icon: {fileID: 0}
-  sprite: {fileID: 0}
+  icon: {fileID: 21300000, guid: e0be70f5fbada534d82c44a5904f8894, type: 3}
+  sprite: {fileID: 21300000, guid: e0be70f5fbada534d82c44a5904f8894, type: 3}
   starter: 0
   cost: 7500
   value: 2500

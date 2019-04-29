@@ -34,6 +34,25 @@ public class UIManager : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Attempts to end the game if the player has enough money
+	/// </summary>
+	public void BuyBackSoul()
+	{
+		if(Player.Withdraw(999999, Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -1)))
+		{
+			SetScene(2);
+		}
+	}
+
+	/// <summary>
+	/// Ends application.
+	/// </summary>
+	public void QuitGame()
+	{
+		Application.Quit();
+	}
+
+	/// <summary>
 	/// Change to the argument scene
 	/// </summary>
 	public void SetScene(int index)

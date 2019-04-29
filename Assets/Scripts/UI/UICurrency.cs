@@ -14,6 +14,7 @@ public class UICurrency : MonoBehaviour
 	private void Start()
 	{
 		textMesh = GetComponent<TextMeshProUGUI>();
+		StartCoroutine(UpdateCurrencyValue());
 	}
 
 	private void OnEnable()

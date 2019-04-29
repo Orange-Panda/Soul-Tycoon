@@ -14,6 +14,7 @@ public class UITime : MonoBehaviour
 	void Start()
 	{
 		textMesh = GetComponent<TextMeshProUGUI>();
+		UpdateText();
 	}
 
 	private void OnEnable()

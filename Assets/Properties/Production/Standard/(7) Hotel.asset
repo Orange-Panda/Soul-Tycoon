@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Hotel California
   description: '...'
-  icon: {fileID: 0}
-  sprite: {fileID: 0}
+  icon: {fileID: 21300000, guid: da7e3f0957185f449bcaf649b8fe81ab, type: 3}
+  sprite: {fileID: 21300000, guid: da7e3f0957185f449bcaf649b8fe81ab, type: 3}
   starter: 0
   cost: 250000
   value: 125000
