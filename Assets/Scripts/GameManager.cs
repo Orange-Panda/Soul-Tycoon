@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
 		{ GameSpeed.Paused, 0.01f },
 		{ GameSpeed.Slow, 0.55f },
 		{ GameSpeed.Standard, 1f },
-		{ GameSpeed.Fast, 1.5f },
-		{ GameSpeed.VeryFast, 2f },
+		{ GameSpeed.Fast, 1.75f },
+		{ GameSpeed.VeryFast, 2.5f },
 	};
 
 	/// <summary>
@@ -43,6 +43,17 @@ public class GameManager : MonoBehaviour
 		instance = this;
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Mouse1))
+		{
+			if(Tile.highlightedTile != null)
+			{
+				Tile.highlightedTile.AttemptModification();
+			}
+		}
+	}
+
 	/// <summary>
 	/// Responsible for progressing time in game.
 	/// </summary>
@@ -52,14 +63,13 @@ public class GameManager : MonoBehaviour
 		{
 			yield return new WaitForSeconds(hourLength);
 			hour++;
-			HourTick();
-
 			if (hour > 24)
 			{
 				hour = 1;
 				day++;
 				DayTick();
 			}
+			HourTick();
 		}
 	}
 }

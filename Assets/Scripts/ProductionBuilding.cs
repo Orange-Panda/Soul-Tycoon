@@ -158,11 +158,11 @@ public class ProductionBuilding : MonoBehaviour
 	/// <summary>
 	/// Takes the currency being held by the building and puts it into the player's balance.
 	/// </summary>
-	public bool GatherCurrency()
+	public bool GatherCurrency(bool playSound = true)
 	{
 		if (heldCurrency > 0)
 		{
-			Player.Deposit(heldCurrency, transform.position);
+			Player.Deposit(heldCurrency, transform.position, playSound);
 			heldCurrency = 0;
 			var emission = productionParticles.emission;
 			emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);

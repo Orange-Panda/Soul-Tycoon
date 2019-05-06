@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
 	public SpriteRenderer fill, border, buildingSprite;
 	public static bool inputEnabled = true;
 	public BuildingProperties building;
+	public static Tile highlightedTile;
 
 	private void OnEnable()
 	{
@@ -43,11 +44,16 @@ public class Tile : MonoBehaviour
 	private void OnMouseEnter()
 	{
 		border.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+		highlightedTile = this;
 	}
 
 	private void OnMouseExit()
 	{
 		border.color = Color.white;
+		if(highlightedTile = this)
+		{
+			highlightedTile = null;
+		}
 	}
 
 	private void OnMouseDown()
@@ -67,15 +73,28 @@ public class Tile : MonoBehaviour
 				textMesh.SetText("");
 			}
 		}
-		//If they have a production building on it already, open up the modify menu.
-		else if (productionBuilding = GetComponent<ProductionBuilding>())
+		else if(productionBuilding = GetComponent<ProductionBuilding>())
 		{
-			if (!productionBuilding.GatherCurrency())
-			{
-				CreateMenu("Modify");
-			}
+			productionBuilding.GatherCurrency();
 		}
 		//If they own they tile and don't have a building, open up the buy menu.
+		else
+		{
+			CreateMenu(properties.tileType.ToString());
+		}
+	}
+
+	public void AttemptModification()
+	{
+		if (!inputEnabled || !purchased) return;
+
+		ProductionBuilding productionBuilding;
+
+		if (productionBuilding = GetComponent<ProductionBuilding>())
+		{
+			productionBuilding.GatherCurrency();
+			CreateMenu("Modify");
+		}
 		else
 		{
 			CreateMenu(properties.tileType.ToString());

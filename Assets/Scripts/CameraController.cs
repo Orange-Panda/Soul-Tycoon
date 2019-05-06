@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
 		}
 
 		//Move to cursor
-		if (Input.GetKeyDown(KeyCode.Mouse2))
+		if (Input.GetKeyDown(KeyCode.Mouse2) || Input.GetKeyDown(KeyCode.Space))
 		{
 			StopAllCoroutines();
 			StartCoroutine(TravelToPosition(mainCamera.ScreenToWorldPoint(Input.mousePosition)));
