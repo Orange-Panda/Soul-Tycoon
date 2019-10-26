@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: Outskirts
+  m_Name: Outskirts East
   m_EditorClassIdentifier: 
   tileName: The Outskirts
   tileType: 1
