@@ -15,24 +15,23 @@ public class TilePlaceable : MonoBehaviour
 
 	private bool Placeable => !obstructed && withinRegion;
 
-	private void Start()
+	private void Awake()
 	{
 		camera = FindObjectOfType<Camera>();
 		textMesh = GetComponentInChildren<TextMeshPro>();
-		InvokeRepeating("CheckBuildState", 0f, 1 / 60f);
 	}
 
 	private void Update()
 	{
 		transform.position = camera.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, .8f, 10f);
-	}
 
-	private void CheckBuildState()
-	{
+		//Initialize variables
 		int arraySize;
-		//Decide if obstructed by another building 
 		obstructed = false;
-		arraySize = Physics2D.OverlapCircleNonAlloc(transform.position, 1.28f, results);
+		withinRegion = false;
+
+		//Decide if obstructed by another building 
+		arraySize = Physics2D.OverlapCircleNonAlloc(transform.position - new Vector3(0f, 0.4f), 0.9f, results);
 		for (int i = 0; i < arraySize; i++)
 		{
 			if (results[i].CompareTag("Tile"))
@@ -43,7 +42,6 @@ public class TilePlaceable : MonoBehaviour
 		}
 
 		//Decide if within a district
-		withinRegion = false;
 		arraySize = Physics2D.OverlapCircleNonAlloc(transform.position - new Vector3(0f, 1.28f), 0.01f, results);
 		for (int i = 0; i < arraySize; i++)
 		{
@@ -56,6 +54,15 @@ public class TilePlaceable : MonoBehaviour
 			}
 		}
 
-		textMesh.SetText(string.Format("O: {0}\nR: {1}\nP: {2}", obstructed, withinRegion, Placeable));
+		//Set text
+		textMesh.color = Placeable ? Color.white : Color.red;
+		if (withinRegion && regionProperties != null)
+		{
+			textMesh.SetText(string.Format("{0}\n${1}\n{2}%", regionProperties.tileName, regionProperties.tilePurchaseCost, Mathf.FloorToInt(regionProperties.traffic * 100)));
+		}
+		else
+		{
+			textMesh.SetText("Move within a district to purchase");
+		}
 	}
 }
