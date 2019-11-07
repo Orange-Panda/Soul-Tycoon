@@ -38,8 +38,14 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	private void Update()
 	{
+		//Cancel
+		if (Input.GetMouseButtonDown(1) && held)
+		{
+			Return();
+		}
+		
 		//Modify the transform and appearance of the object
-		transform.position = Vector3.Lerp(transform.position, held ? Input.mousePosition - new Vector3(10f, -10f, 0) : initialPosition, held ? 0.6f : 0.25f);
+		transform.position = Vector3.Lerp(transform.position, held ? Input.mousePosition : initialPosition, held ? 0.6f : 0.25f);
 		transform.rotation = Quaternion.Slerp(transform.rotation, held ? GripRotation : Quaternion.identity, held ? 0.25f : 0.1f);
 		image.color = held || cursorInside ? Color.gray : Color.white;
 		canvas.enabled = GetBuildableState() == BuildableState.Dragging ? false : true;
@@ -62,13 +68,18 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
-		held = false;
-		transform.position = initialPosition;
-
 		if (GetBuildableState() == BuildableState.Dragging)
 		{
-			TilePlaceable.AttemptBuild();
+			TilePlaceable.instance.AttemptBuild();
 		}
+
+		Return();
+	}
+
+	public void Return()
+	{
+		held = false;
+		transform.position = initialPosition;
 	}
 
 	public BuildableState GetBuildableState()

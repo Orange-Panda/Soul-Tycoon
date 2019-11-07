@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 /// <summary>
 /// Responsible for juding if a tile is placeable on the map and controlling the game space appearance of the tile.
+/// There should be only one present in the scene.
 /// </summary>
 public class TilePlaceable : MonoBehaviour
 {
@@ -16,10 +15,13 @@ public class TilePlaceable : MonoBehaviour
 	private TextMeshPro textMesh;
 	new private Camera camera;
 
+	public static TilePlaceable instance;
+
 	private bool Placeable => !obstructed && withinRegion;
 
 	private void Awake()
 	{
+		instance = this;
 		camera = FindObjectOfType<Camera>();
 		textMesh = GetComponentInChildren<TextMeshPro>();
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
@@ -78,8 +80,15 @@ public class TilePlaceable : MonoBehaviour
 		}
 	}
 
-	internal static void AttemptBuild()
+	internal void AttemptBuild()
 	{
-		throw new NotImplementedException();
+		if (Placeable)
+		{
+			GameObject newTile = Instantiate(Resources.Load<GameObject>("Tile"), transform.position, transform.rotation);
+			Tile tile = newTile.GetComponent<Tile>();
+			tile.properties = regionProperties;
+		}
+
+		HUDBuildCommand.instance.Return();
 	}
 }
