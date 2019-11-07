@@ -24,8 +24,7 @@ public class HUDBoundary : MonoBehaviour
 	public bool GetMouseOverState()
 	{
 		float resolutionScalar = (float)Screen.height / CanvasResolutionHeight;
-		float objective = CanvasResolutionHeight - rectTransform.rect.height;
-		float distanceFromList = objective - (Input.mousePosition.y / resolutionScalar);
-		return distanceFromList > 0;
+		float objective = rectTransform.rect.height;
+		return (Input.mousePosition.y / resolutionScalar) <= objective;
 	}
 }

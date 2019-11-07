@@ -1,8 +1,10 @@
-﻿using TMPro;
+﻿using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Handles user placement of tiles on the map.
+/// Responsible for juding if a tile is placeable on the map and controlling the game space appearance of the tile.
 /// </summary>
 public class TilePlaceable : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class TilePlaceable : MonoBehaviour
 	private bool withinRegion;
 	private TileProperties regionProperties;
 	private Collider2D[] results = new Collider2D[32];
+	private SpriteRenderer[] spriteRenderers;
 	private TextMeshPro textMesh;
 	new private Camera camera;
 
@@ -19,6 +22,7 @@ public class TilePlaceable : MonoBehaviour
 	{
 		camera = FindObjectOfType<Camera>();
 		textMesh = GetComponentInChildren<TextMeshPro>();
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 	}
 
 	private void Update()
@@ -64,5 +68,18 @@ public class TilePlaceable : MonoBehaviour
 		{
 			textMesh.SetText("Move within a district to purchase");
 		}
+
+		//Visibility
+		bool visible = HUDBuildCommand.instance.GetBuildableState() == BuildableState.Dragging ? true : false;
+		textMesh.enabled = visible;
+		foreach (SpriteRenderer renderer in spriteRenderers)
+		{
+			renderer.enabled = visible;
+		}
+	}
+
+	internal static void AttemptBuild()
+	{
+		throw new NotImplementedException();
 	}
 }
