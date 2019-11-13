@@ -5,14 +5,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// Handles the input and appearance for tile building. Can't expliclty build tiles itself.
+/// Handles the input and appearance for tile buildable menu option. 
+/// Can't expliclty build tiles itself.
 /// </summary>
 public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
 	//Component references
-	public Image image;
-	private Canvas canvas;
-	public static HUDBuildCommand instance;
+	private Image image;
+	public static HUDBuildCommand selected;
 
 	//Constants
 	private const int MouseSampleCount = 8;
@@ -30,16 +30,15 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	private void Start()
 	{
-		canvas = GetComponent<Canvas>();
+		image = GetComponentInChildren<Image>();
 		initialPosition = transform.position;
-		instance = this;
 		if (!trackingCursor) StartCoroutine(TrackCursor());
 	}
 
 	private void Update()
 	{
 		//Cancel
-		if (Input.GetMouseButtonDown(1) && held)
+		if (held && Input.GetMouseButtonDown(1))
 		{
 			Return();
 		}
@@ -48,7 +47,7 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		transform.position = Vector3.Lerp(transform.position, held ? Input.mousePosition : initialPosition, held ? 0.6f : 0.25f);
 		transform.rotation = Quaternion.Slerp(transform.rotation, held ? GripRotation : Quaternion.identity, held ? 0.25f : 0.1f);
 		image.color = held || cursorInside ? Color.gray : Color.white;
-		canvas.enabled = GetBuildableState() == BuildableState.Dragging ? false : true;
+		image.enabled = GetBuildableState() == BuildableState.Dragging ? false : true;
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
@@ -64,6 +63,7 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	public void OnPointerDown(PointerEventData eventData)
 	{
 		held = true;
+		selected = this;
 	}
 
 	public void OnPointerUp(PointerEventData eventData)
@@ -80,9 +80,10 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	{
 		held = false;
 		transform.position = initialPosition;
+		selected = null;
 	}
 
-	public BuildableState GetBuildableState()
+	private BuildableState GetBuildableState()
 	{
 		if (held)
 		{
@@ -91,6 +92,19 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		else if (cursorInside)
 		{
 			return BuildableState.Hover;
+		}
+		else return BuildableState.Null;
+	}
+
+	/// <summary>
+	/// Checks what the global buildable state is.
+	/// </summary>
+	/// <returns>The buildable state of the selected buildable, otherwise is null.</returns>
+	public static BuildableState GetBuildableStateGlobal()
+	{
+		if (selected)
+		{
+			return selected.GetBuildableState();
 		}
 		else return BuildableState.Null;
 	}
@@ -121,5 +135,12 @@ public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 public enum BuildableState
 { 
-	Null, Hover, Held, Dragging
+	/// <summary> Idle state </summary>
+	Null,
+	/// <summary> Cursor hovering </summary>
+	Hover,
+	/// <summary> Selected </summary>
+	Held,
+	/// <summary> Selected and inside play area </summary>
+	Dragging
 }

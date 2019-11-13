@@ -7,9 +7,13 @@ using UnityEngine;
 /// </summary>
 public class TilePlaceable : MonoBehaviour
 {
+	//Private fields
 	private bool obstructed;
+	[System.Obsolete]
 	private bool withinRegion;
-	private TileProperties regionProperties;
+
+	//Component references
+	private TileProperties hoverRegion;
 	private Collider2D[] results = new Collider2D[32];
 	private SpriteRenderer[] spriteRenderers;
 	private TextMeshPro textMesh;
@@ -17,7 +21,7 @@ public class TilePlaceable : MonoBehaviour
 
 	public static TilePlaceable instance;
 
-	private bool Placeable => !obstructed && withinRegion;
+	private bool Placeable => !obstructed && hoverRegion != null;
 
 	private void Awake()
 	{
@@ -34,7 +38,7 @@ public class TilePlaceable : MonoBehaviour
 		//Initialize variables
 		int arraySize;
 		obstructed = false;
-		withinRegion = false;
+		hoverRegion = null;
 
 		//Decide if obstructed by another building 
 		arraySize = Physics2D.OverlapCircleNonAlloc(transform.position - new Vector3(0f, 0.4f), 0.9f, results);
@@ -53,18 +57,17 @@ public class TilePlaceable : MonoBehaviour
 		{
 			if (results[i].CompareTag("District"))
 			{
-				withinRegion = true;
 				DistrictRegion region = results[i].GetComponent<DistrictRegion>();
-				regionProperties = region.districtProperties;
+				hoverRegion = region.districtProperties;
 				break;
 			}
 		}
 
 		//Set text
 		textMesh.color = Placeable ? Color.white : Color.red;
-		if (withinRegion && regionProperties != null)
+		if (hoverRegion != null)
 		{
-			textMesh.SetText(string.Format("{0}\n${1}\n{2}%", regionProperties.tileName, regionProperties.tilePurchaseCost, Mathf.FloorToInt(regionProperties.traffic * 100)));
+			textMesh.SetText(string.Format("{0}\n${1}\n{2}%", hoverRegion.tileName, hoverRegion.tilePurchaseCost, Mathf.FloorToInt(hoverRegion.traffic * 100)));
 		}
 		else
 		{
@@ -72,23 +75,26 @@ public class TilePlaceable : MonoBehaviour
 		}
 
 		//Visibility
-		bool visible = HUDBuildCommand.instance.GetBuildableState() == BuildableState.Dragging ? true : false;
-		textMesh.enabled = visible;
+		bool visibility = HUDBuildCommand.GetBuildableStateGlobal() == BuildableState.Dragging;
+		textMesh.enabled = visibility;
 		foreach (SpriteRenderer renderer in spriteRenderers)
 		{
-			renderer.enabled = visible;
+			renderer.enabled = visibility;
 		}
 	}
 
+	/// <summary>
+	/// Attempts to build the currently selected unit.
+	/// </summary>
 	internal void AttemptBuild()
 	{
 		if (Placeable)
 		{
 			GameObject newTile = Instantiate(Resources.Load<GameObject>("Tile"), transform.position, transform.rotation);
 			Tile tile = newTile.GetComponent<Tile>();
-			tile.properties = regionProperties;
+			tile.properties = hoverRegion;
 		}
 
-		HUDBuildCommand.instance.Return();
+		HUDBuildCommand.selected.Return();
 	}
 }

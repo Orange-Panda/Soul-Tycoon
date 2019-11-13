@@ -4,9 +4,10 @@ using UnityEngine;
 /// <summary>
 /// Allows the player to control the camera.
 /// </summary>
+[RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-	bool enableInput = true;
+	private bool inputEnabled = true;
 	private Camera mainCamera;
 
 	private void Start()
@@ -14,20 +15,14 @@ public class CameraController : MonoBehaviour
 		mainCamera = GetComponent<Camera>();
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
-		//Camera x and y movement
-		if (enableInput)
+		//Camera input movement and zooming
+		if (inputEnabled)
 		{
 			Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 			transform.Translate(input * Time.unscaledDeltaTime * mainCamera.orthographicSize * 2f, Space.Self);
-		}
-
-		//Zooming
-		if (Tile.inputEnabled)
-		{
-			mainCamera.orthographicSize = Mathf.Max(2, Mathf.Min(mainCamera.orthographicSize + Input.mouseScrollDelta.y * -1 / 3, 15));
+			mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize + (Input.mouseScrollDelta.y * -Time.unscaledDeltaTime * 30), 3, 15);
 		}
 
 		//Return to center
@@ -51,12 +46,12 @@ public class CameraController : MonoBehaviour
 	/// <param name="position">Target location</param>
 	IEnumerator TravelToPosition(Vector3 position)
 	{
-		enableInput = false;
-		for (int i = 0; i < 20; i++)
+		inputEnabled = false;
+		for (int i = 0; i < 15; i++)
 		{
 			transform.position = Vector3.Lerp(transform.position, position, 0.15f);
 			yield return null;
 		}
-		enableInput = true;
+		inputEnabled = true;
 	}
 }
