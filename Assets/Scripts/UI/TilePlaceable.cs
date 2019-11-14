@@ -21,7 +21,7 @@ public class TilePlaceable : MonoBehaviour
 
 	public static TilePlaceable instance;
 
-	private bool Placeable => !obstructed && hoverRegion != null;
+	private bool Placeable => !obstructed && hoverRegion != null && HUDBuildCommand.selected;
 
 	private void Awake()
 	{
@@ -88,11 +88,13 @@ public class TilePlaceable : MonoBehaviour
 	/// </summary>
 	internal void AttemptBuild()
 	{
-		if (Placeable)
+		if (Placeable && Player.Withdraw(HUDBuildCommand.selected.building.cost + hoverRegion.tilePurchaseCost, camera.ScreenToWorldPoint(Input.mousePosition), true))
 		{
 			GameObject newTile = Instantiate(Resources.Load<GameObject>("Tile"), transform.position, transform.rotation);
 			Tile tile = newTile.GetComponent<Tile>();
 			tile.properties = hoverRegion;
+			tile.AcquireTile();
+			tile.PlaceBuilding(HUDBuildCommand.selected.building);
 		}
 
 		HUDBuildCommand.selected.Return();

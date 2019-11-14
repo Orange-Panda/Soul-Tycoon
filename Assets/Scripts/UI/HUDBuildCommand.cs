@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class HUDBuildCommand : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
 	//Component references
+	public BuildingProperties building;
 	private Image image;
 	public static HUDBuildCommand selected;
 

@@ -16,15 +16,13 @@ public class Tile : MonoBehaviour
 	public BuildingProperties building;
 	public static Tile highlightedTile;
 
-	private void OnEnable()
+	private void Awake()
 	{
-		//Handles missing properties if Luke forgot to add the properties.
 		if (properties == null)
 		{
-			border.color = new Color(0.3f, 0.3f, 0.3f, 1f);
+			border.color = Color.white;
 			fill.color = new Color(0.3f, 0f, 0f, 1f);
 			textMesh.SetText("N/A");
-			enabled = false;
 		}
 		else
 		{
@@ -32,7 +30,10 @@ public class Tile : MonoBehaviour
 			fill.color = Color.black;
 			textMesh.SetText(properties.tilePurchaseCost.ToString());
 		}
+	}
 
+	private void OnEnable()
+	{
 		GameManager.DayTick += GameManager_DayTick;
 	}
 
@@ -68,9 +69,7 @@ public class Tile : MonoBehaviour
 			//If the player has enough money to purchase this tile, purchase it.
 			if (Player.Withdraw(properties.tilePurchaseCost, transform.position))
 			{
-				purchased = true;
-				fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
-				textMesh.SetText("");
+				AcquireTile();
 			}
 		}
 		else if(productionBuilding = GetComponent<ProductionBuilding>())
@@ -82,6 +81,16 @@ public class Tile : MonoBehaviour
 		{
 			CreateMenu(properties.tileType.ToString());
 		}
+	}
+
+	/// <summary>
+	/// Gives the player ownership of the tile explictly.
+	/// </summary>
+	public void AcquireTile()
+	{
+		purchased = true;
+		fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
+		textMesh.SetText("");
 	}
 
 	public void AttemptModification()
@@ -113,21 +122,32 @@ public class Tile : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Attempts to purchase the argument building.
+	/// Attempts to purchase a building. If the conditions are met, will place building.
 	/// </summary>
-	internal bool PurchaseBuilding(ProductionProperties properties)
+	internal bool PurchaseBuilding(BuildingProperties properties)
 	{
 		if (building == null && Player.Withdraw(properties.cost, transform.position))
 		{
-			building = properties;
-			buildingSprite.sprite = building.sprite;
-			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
-			production.InitializeBuilding(properties);
+			PlaceBuilding(properties);
 			return true;
 		}
 		else
 		{
 			return false;
+		}
+	}
+
+	/// <summary>
+	/// Explictly places a building on this tile.
+	/// </summary>
+	public void PlaceBuilding(BuildingProperties properties)
+	{
+		building = properties;
+		buildingSprite.sprite = building.sprite;
+		if (properties.GetType() == typeof(ProductionProperties))
+		{
+			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
+			production.InitializeBuilding((ProductionProperties)properties);
 		}
 	}
 
