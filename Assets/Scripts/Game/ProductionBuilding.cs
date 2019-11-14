@@ -14,30 +14,10 @@ public class ProductionBuilding : MonoBehaviour
 	public int durability = 100;
 	private ParticleSystem productionParticles, smokeParticles;
 
-	public float YieldValue
-	{
-		get
-		{
-			return thisBuilding.yieldBaseRate * tile.properties.traffic * DurabilityYieldModifier;
-		}
-	}
-
-	public uint RepairCost
-	{
-		get
-		{
-			return (uint)Mathf.CeilToInt(Mathf.Abs((float)durability / thisBuilding.durability - 1) * thisBuilding.repairCost);
-		}
-	}
-
-	public float DurabilityYieldModifier
-	{
-		get
-		{
-			if (durability <= 0) return 0;
-			return (float)durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier;
-		}
-	}
+	public float YieldValue => thisBuilding.yieldBaseRate * tile.properties.traffic * DurabilityYieldModifier;
+	public uint RepairCost => (uint)Mathf.CeilToInt(Mathf.Abs((float)durability / thisBuilding.durability - 1) * thisBuilding.repairCost);
+	public float DurabilityYieldModifier => durability > 0 ? (float)durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier : 0;
+	public bool Repairable => durability < thisBuilding.durability;
 
 	private void Start()
 	{

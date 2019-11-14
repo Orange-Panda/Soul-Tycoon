@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: The Slums
+  m_Name: Slums
   m_EditorClassIdentifier: 
-  tileName: Tile on 5th St.
-  tileType: 1
-  tilePurchaseCost: 75
-  tileRentCost: 0
-  traffic: 2
+  tileName: Slums
+  tileDescription: A rundown district on the southeast side of town. A great place
+    for getting traffic but don't underestimate the necessity for frequest repairs
+    due to the high crime rate.
+  tilePurchaseCost: 50
+  growthScale: 1.05
+  traffic: 1.5
   environmentalDisaster:
   - properties: {fileID: 11400000, guid: 49cd5bb2dccfd9b4786ccc8fc7bde94e, type: 2}
     name: Sabotage
@@ -28,3 +30,5 @@ MonoBehaviour:
     risk: 1
     damageBase: 100
     damageVariance: 0
+  tileType: 1
+  tileRentCost: 0

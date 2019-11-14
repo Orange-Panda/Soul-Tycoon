@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
+  m_Name: Commercial District
+  m_EditorClassIdentifier: 
+  tileName: Commercial District
+  tileDescription: A major purchasing hotspot for many tourists and local buyers alike.
+    Property here can become quite expensive, but worthwhile.
+  tilePurchaseCost: 1000
+  growthScale: 1.2
+  traffic: 2.5
+  environmentalDisaster:
+  - properties: {fileID: 0}
+    name: Power Outage
+    risk: 1
+    damageBase: 10
+    damageVariance: 100
+  - properties: {fileID: 0}
+    name: Robbery
+    risk: 1
+    damageBase: 100
+    damageVariance: 200
+  - properties: {fileID: 0}
+    name: Sabotage
+    risk: 1
+    damageBase: 500
+    damageVariance: 0
+  tileType: 1
+  tileRentCost: 250

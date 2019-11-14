@@ -51,7 +51,7 @@ public class Tile : MonoBehaviour
 	private void OnMouseExit()
 	{
 		border.color = Color.white;
-		if(highlightedTile = this)
+		if (highlightedTile = this)
 		{
 			highlightedTile = null;
 		}
@@ -72,9 +72,17 @@ public class Tile : MonoBehaviour
 				AcquireTile();
 			}
 		}
-		else if(productionBuilding = GetComponent<ProductionBuilding>())
+		else if (productionBuilding = GetComponent<ProductionBuilding>())
 		{
-			productionBuilding.GatherCurrency();
+			if (productionBuilding.heldCurrency > 0)
+			{
+				productionBuilding.GatherCurrency();
+			}
+			else if (productionBuilding.Repairable)
+			{
+				productionBuilding.AttemptRepair();
+			}
+			
 		}
 		//If they own they tile and don't have a building, open up the buy menu.
 		else

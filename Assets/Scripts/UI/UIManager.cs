@@ -64,7 +64,5 @@ public class UIManager : MonoBehaviour
 	public void ResetGame()
 	{
 		SceneManager.LoadScene(0);
-		GameManager.day = 1;
-		GameManager.hour = 1;
 	}
 }

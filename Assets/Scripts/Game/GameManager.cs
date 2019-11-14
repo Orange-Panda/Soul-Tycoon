@@ -7,17 +7,16 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-	public const byte hourLength = 2;
-	public static byte hour = 1;
-	public static uint day = 1;
-	Coroutine hourCycle;
+	//Fields
+	public const byte HourLength = 2;
 	public static GameSpeed gameSpeed = GameSpeed.Paused;
-	GameManager instance;
 
+	//Events
 	public delegate void TimeEvent();
 	public static event TimeEvent HourTick = delegate { };
 	public static event TimeEvent DayTick = delegate { };
 
+	//Dictionaries
 	public static Dictionary<GameSpeed, float> speedValues = new Dictionary<GameSpeed, float>()
 	{
 		{ GameSpeed.Paused, 0.01f },
@@ -26,6 +25,27 @@ public class GameManager : MonoBehaviour
 		{ GameSpeed.Fast, 1.75f },
 		{ GameSpeed.VeryFast, 2.5f },
 	};
+
+	//Properties
+	public static byte Hour { get; private set; } = 1;
+	public static uint Day { get; private set; } = 1;
+
+	private void Start()
+	{
+		SetGameSpeed(GameSpeed.Paused);
+		StartCoroutine(HourCycle());
+		Day = 1;
+		Hour = 1;
+		Player.SetCurrency(0);
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Mouse1) && Tile.highlightedTile != null)
+		{
+			Tile.highlightedTile.AttemptModification();
+		}
+	}
 
 	/// <summary>
 	/// Modifies the time scale.
@@ -36,24 +56,6 @@ public class GameManager : MonoBehaviour
 		gameSpeed = speed;
 	}
 
-	private void Start()
-	{
-		SetGameSpeed(GameSpeed.Paused);
-		hourCycle = StartCoroutine(HourCycle());
-		instance = this;
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Mouse1))
-		{
-			if(Tile.highlightedTile != null)
-			{
-				Tile.highlightedTile.AttemptModification();
-			}
-		}
-	}
-
 	/// <summary>
 	/// Responsible for progressing time in game.
 	/// </summary>
@@ -61,12 +63,12 @@ public class GameManager : MonoBehaviour
 	{
 		while (true)
 		{
-			yield return new WaitForSeconds(hourLength);
-			hour++;
-			if (hour > 24)
+			yield return new WaitForSeconds(HourLength);
+			Hour++;
+			if (Hour > 24)
 			{
-				hour = 1;
-				day++;
+				Hour = 1;
+				Day++;
 				DayTick();
 			}
 			HourTick();

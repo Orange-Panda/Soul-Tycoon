@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4226164055
+    locked: 0
+  - name: Nonpriority
+    uniqueID: 998966805
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Priority
+    uniqueID: 3078122975
+    locked: 0
+  - name: Critical
+    uniqueID: 1209875947
     locked: 0

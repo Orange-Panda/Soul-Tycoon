@@ -39,16 +39,17 @@ public class UICurrency : MonoBehaviour
 	IEnumerator UpdateCurrencyValue()
 	{
 		//Set the color and wait a moment to let the player process the color change.
-		textMesh.color = displayValue > Player.currency ? new Color(1f, 0.8f, 0.8f) : new Color(0.8f, 1f, 0.8f);
+		yield return null;
+		textMesh.color = displayValue > Player.Currency ? new Color(1f, 0.8f, 0.8f) : new Color(0.8f, 1f, 0.8f);
 		yield return new WaitForSecondsRealtime(0.1f);
 
 		//Every 0.065 seconds, change the value to be closer to the true value.
-		while (displayValue != Player.currency)
+		do
 		{
-			displayValue = displayValue > Player.currency ? Mathf.FloorToInt(Mathf.Lerp(displayValue, Player.currency, 0.5f)) : Mathf.CeilToInt(Mathf.Lerp(displayValue, Player.currency, 0.3f));
+			displayValue = displayValue > Player.Currency ? Mathf.FloorToInt(Mathf.Lerp(displayValue, Player.Currency, 0.5f)) : Mathf.CeilToInt(Mathf.Lerp(displayValue, Player.Currency, 0.3f));
 			textMesh.SetText(string.Format("{0}{1}", prefix, displayValue));
 			yield return new WaitForSecondsRealtime(0.065f);
-		}
+		} while (displayValue != Player.Currency);
 
 		textMesh.color = Color.white;
 		yield break;

@@ -2,29 +2,42 @@
 using UnityEngine;
 
 /// <summary>
-/// Data for a tile on the map.
+/// Data for tiles placed in a region of the map.
 /// </summary>
 [CreateAssetMenu(menuName = "Soul Tycoon/Tile")]
 public class TileProperties : ScriptableObject
 {
-	[Tooltip("Flavor name of the tile.")]
+	[Tooltip("Name of the region this tile occupies")]
 	public string tileName = "Tile on 5th St.";
 
-	[Tooltip("Dictates the type of buildings that can be built on this tile.")]
-	public TileType tileType;
+	[Tooltip("Description of the region this tile occupies")]
+	[TextArea]
+	public string tileDescription = "It is a place.";
 
-	[Tooltip("Cost to build on this tile.")]
+	[Space]
+	[Tooltip("Flat amount added to the purchase of a building in this region.")]
 	public uint tilePurchaseCost = 5;
 
-	[Tooltip("Cost per turn to continue using the tile.")]
-	public uint tileRentCost = 1;
+	[Tooltip("The rate at which the cost is amplified based off number of buildings in the region. The equation for this is: (Building Cost + Tile Cost) * Growth Scale^NumBuilt")]
+	[Range(1f, 1.5f)]
+	public float growthScale = 1;
 
-	[Tooltip("Modifier to the frequency of yields.")]
-	[Range(0f, 4f)]
+	[Tooltip("Scalar for how often production buildings will yield.")]
+	[Range(0f, 5f)]
 	public float traffic = 1;
 
-	[Tooltip("The potential disaster that this tile presents.")]
+	[Space]
+	[Tooltip("The potential disasters that this tile presents.")]
 	public List<BuildingDistaster> environmentalDisaster;
+
+	[Header("Obsolete")]
+	[Tooltip("OBSOLETE: Dictates the type of buildings that can be built on this tile.")]
+	[System.Obsolete]
+	public TileType tileType;
+
+	[Tooltip("OBSOLETE: Cost per turn to continue using the tile.")]
+	[System.Obsolete]
+	public uint tileRentCost = 1;
 }
 
 public enum TileType

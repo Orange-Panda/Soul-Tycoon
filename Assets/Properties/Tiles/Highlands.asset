@@ -10,26 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: Commercial
+  m_Name: Highlands
   m_EditorClassIdentifier: 
-  tileName: Commercial
-  tileType: 1
-  tilePurchaseCost: 2500
-  tileRentCost: 250
-  traffic: 2.75
+  tileName: The Highlands
+  tileDescription: The big money of Soul City lies within The Highlands. Property
+    is incredibly pricy, but a single well managed building can bring in a large sum
+    of cash.
+  tilePurchaseCost: 50000
+  growthScale: 1.25
+  traffic: 5
   environmentalDisaster:
   - properties: {fileID: 0}
-    name: Power Outage
+    name: Landslide
     risk: 1
-    damageBase: 10
-    damageVariance: 100
-  - properties: {fileID: 0}
-    name: Robbery
-    risk: 1
-    damageBase: 100
-    damageVariance: 200
-  - properties: {fileID: 0}
-    name: Sabotage
-    risk: 1
-    damageBase: 500
+    damageBase: 10000
     damageVariance: 0
+  tileType: 1
+  tileRentCost: 1250

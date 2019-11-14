@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: Residental
+  m_Name: Residental District
   m_EditorClassIdentifier: 
-  tileName: Resedential
-  tileType: 1
-  tilePurchaseCost: 750
-  tileRentCost: 50
-  traffic: 1
+  tileName: Residential District
+  tileDescription: A quiet place in town with little traffic, however this district
+    is in a prime position near other residential districts.
+  tilePurchaseCost: 5000
+  growthScale: 1.35
+  traffic: 0.5
   environmentalDisaster: []
+  tileType: 1
+  tileRentCost: 50

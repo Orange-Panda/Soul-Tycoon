@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
-  m_Name: Central Roundabout
+  m_Name: Soul City Park
   m_EditorClassIdentifier: 
-  tileName: Main Square
-  tileType: 1
-  tilePurchaseCost: 10
-  tileRentCost: 2
-  traffic: 1.25
+  tileName: Soul City Park
+  tileDescription: A popular hangout spot amoung many residents in the Soul City.
+    The city would like to keep this place less developed and will incur a large fee
+    on construction when building too much.
+  tilePurchaseCost: 100
+  growthScale: 1.5
+  traffic: 2
   environmentalDisaster:
   - properties: {fileID: 0}
-    name: Fire
+    name: Eruption!
     risk: 1
-    damageBase: 0
-    damageVariance: 30
-  - properties: {fileID: 0}
-    name: Earthquake
-    risk: 1
-    damageBase: 50
-    damageVariance: 10
+    damageBase: 1000
+    damageVariance: 0
+  tileType: 1
+  tileRentCost: 20

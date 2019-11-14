@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
   m_Name: Outskirts West
   m_EditorClassIdentifier: 
-  tileName: The Outskirts
-  tileType: 1
+  tileName: Outskirts West
+  tileDescription: The more commercial counterpart to Outskirts East. Property is
+    a bit more contested in this district but the traffic opportunities make profits
+    significantly higher than eastside.
   tilePurchaseCost: 500
-  tileRentCost: 45
-  traffic: 1.75
+  growthScale: 1.2
+  traffic: 1.5
   environmentalDisaster:
   - properties: {fileID: 0}
     name: Sandstorm
     risk: 1
     damageBase: 0
     damageVariance: 100
+  tileType: 1
+  tileRentCost: 45

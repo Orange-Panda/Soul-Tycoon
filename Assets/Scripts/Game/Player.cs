@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class Player
 {
-	public static int currency = 0;
+	public static int Currency { get; private set; } = 0;
 
 	public delegate void CurrencyHandler();
 	public static event CurrencyHandler CurrencyValueChanged = delegate { };
@@ -13,7 +13,7 @@ public static class Player
 	/// </summary>
 	public static void Deposit(uint value, Vector3 position, bool playSound = true)
 	{
-		currency += (int)value;
+		Currency += (int)value;
 		CurrencyValueChanged();
 		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Currency"), position - new Vector3(0, 0, 1), Quaternion.identity);
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();
@@ -31,7 +31,7 @@ public static class Player
 	/// <param name="value"></param>
 	public static void SetCurrency(int value)
 	{
-		currency = value;
+		Currency = value;
 		CurrencyValueChanged();
 	}
 
@@ -40,12 +40,12 @@ public static class Player
 	/// </summary>
 	public static bool Withdraw(uint value, Vector3 position, bool playSound = true)
 	{
-		bool insufficient = currency - value < 0;
-		currency = insufficient ? currency : currency - (int)value;
+		bool insufficient = Currency - value < 0;
+		Currency = insufficient ? Currency : Currency - (int)value;
 		CurrencyValueChanged();
 		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Currency"), position - new Vector3(0, 0, 1), Quaternion.identity);
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();
-		textMesh.SetText(string.Format(insufficient ? "Insufficient Funds!\n{1}/{0}" : "-{0}", value, currency));
+		textMesh.SetText(string.Format(insufficient ? "Insufficient Funds!\n{1}/{0}" : "-{0}", value, Currency));
 		textMesh.color = new Color(1f, 0.7f, 0.7f);
 		if (playSound)
 		{
@@ -59,7 +59,7 @@ public static class Player
 	/// </summary>
 	public static void ForceWithdraw(uint value, Vector3 position, bool playSound = true)
 	{
-		currency -= (int)value;
+		Currency -= (int)value;
 		CurrencyValueChanged();
 		GameObject go = Object.Instantiate(Resources.Load<GameObject>("Currency"), position - new Vector3(0, 0, 1), Quaternion.identity);
 		TextMeshPro textMesh = go.GetComponent<TextMeshPro>();

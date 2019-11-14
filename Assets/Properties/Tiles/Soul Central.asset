@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c129236f7136b345b5c39e6369772b1, type: 3}
   m_Name: Soul Central
   m_EditorClassIdentifier: 
-  tileName: Soul Central
-  tileType: 0
+  tileName: '[REMOVED]'
+  tileDescription: 
   tilePurchaseCost: 1
-  tileRentCost: 0
+  growthScale: 1
   traffic: 1
   environmentalDisaster:
   - properties: {fileID: 11400000, guid: 08964a3a682ee094d93591b08ddcfffc, type: 2}
@@ -23,3 +23,5 @@ MonoBehaviour:
     risk: 1
     damageBase: 300
     damageVariance: 0
+  tileType: 0
+  tileRentCost: 0

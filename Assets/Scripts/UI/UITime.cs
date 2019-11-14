@@ -32,7 +32,7 @@ public class UITime : MonoBehaviour
 	/// </summary>
 	private void UpdateText()
 	{
-		textMesh.SetText(string.Format("Day {0}", GameManager.day));
-		image.fillAmount = Mathf.Min(Mathf.Max(((float)GameManager.hour - 1) / 23, 0), 1);
+		textMesh.SetText(string.Format("Day {0}", GameManager.Day));
+		image.fillAmount = Mathf.Min(Mathf.Max(((float)GameManager.Hour - 1) / 23, 0), 1);
 	}
 }
