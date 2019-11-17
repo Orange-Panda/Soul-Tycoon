@@ -12,8 +12,9 @@ public class ProductionBuilding : MonoBehaviour
 	public uint heldCurrency;
 	public bool powered = true;
 	public int durability = 100;
-	private ParticleSystem productionParticles, smokeParticles;
 
+	private ParticleSystem GoldParticles => tile.goldParticles;
+	private ParticleSystem SmokeParticles => tile.smokeParticles;
 	public float YieldValue => thisBuilding.yieldBaseRate * tile.properties.traffic * DurabilityYieldModifier;
 	public uint RepairCost => (uint)Mathf.CeilToInt(Mathf.Abs((float)durability / thisBuilding.durability - 1) * thisBuilding.repairCost);
 	public float DurabilityYieldModifier => durability > 0 ? (float)durability / thisBuilding.durability > thisBuilding.damagedThreshold ? 1 : thisBuilding.damagedMultiplier : 0;
@@ -21,13 +22,10 @@ public class ProductionBuilding : MonoBehaviour
 
 	private void Start()
 	{
-		//Gathers references and starts particle systems.
 		tile = GetComponent<Tile>();
-		productionParticles = GetComponent<ParticleSystem>();
-		smokeParticles = tile.buildingSprite.GetComponent<ParticleSystem>();
-		productionParticles.Play();
-		smokeParticles.Emit(5);
-		smokeParticles.Stop();
+		GoldParticles.Play();
+		SmokeParticles.Emit(5);
+		SmokeParticles.Stop();
 	}
 
 	/// <summary>
@@ -95,10 +93,10 @@ public class ProductionBuilding : MonoBehaviour
 				durability = Mathf.Max(durability - damageDealt, 0);
 
 				//Play particle effects
-				smokeParticles.Emit(15);
+				SmokeParticles.Emit(15);
 				if (durability <= 0)
 				{
-					smokeParticles.Play();
+					SmokeParticles.Play();
 				}
 
 				//Create a notifiaction about the disaster.
@@ -121,7 +119,7 @@ public class ProductionBuilding : MonoBehaviour
 		if (Player.Withdraw(RepairCost, transform.position))
 		{
 			durability = (int)thisBuilding.durability;
-			smokeParticles.Stop();
+			SmokeParticles.Stop();
 		}
 	}
 
@@ -131,7 +129,7 @@ public class ProductionBuilding : MonoBehaviour
 	private void YieldCurrency()
 	{
 		heldCurrency = (uint)Mathf.Min(thisBuilding.maxCurrency, heldCurrency + SoulTycoon.VariableValue(thisBuilding.yieldBase, thisBuilding.yieldVariance));
-		var emission = productionParticles.emission;
+		var emission = GoldParticles.emission;
 		emission.rateOverTime = new ParticleSystem.MinMaxCurve(Mathf.Log(heldCurrency, 1.3f) + 3);
 	}
 
@@ -144,9 +142,9 @@ public class ProductionBuilding : MonoBehaviour
 		{
 			Player.Deposit(heldCurrency, transform.position, playSound);
 			heldCurrency = 0;
-			var emission = productionParticles.emission;
+			var emission = GoldParticles.emission;
 			emission.rateOverTime = new ParticleSystem.MinMaxCurve(0);
-			productionParticles.Emit(30);
+			GoldParticles.Emit(30);
 			return true;
 		}
 		else

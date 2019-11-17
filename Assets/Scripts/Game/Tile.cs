@@ -2,35 +2,22 @@
 using UnityEngine;
 
 /// <summary>
-/// Handles the purchasing of land and buildings.
+/// Handles the interaction and management of any tile.
 /// </summary>
 public class Tile : MonoBehaviour
 {
-	[Space]
+	//Public fields
 	public TileProperties properties;
-	private bool purchased = false;
-	[Header("References")]
-	public TextMeshPro textMesh;
-	public SpriteRenderer fill, border, buildingSprite;
-	public static bool inputEnabled = true;
 	public BuildingProperties building;
-	public static Tile highlightedTile;
+	public SpriteRenderer tile, buildPrimary, buildSecondary, buildExtra, buildBackground;
+	public ParticleSystem goldParticles, smokeParticles;
 
-	private void Awake()
-	{
-		if (properties == null)
-		{
-			border.color = Color.white;
-			fill.color = new Color(0.3f, 0f, 0f, 1f);
-			textMesh.SetText("N/A");
-		}
-		else
-		{
-			border.color = Color.white;
-			fill.color = Color.black;
-			textMesh.SetText(properties.tilePurchaseCost.ToString());
-		}
-	}
+	//Static fields
+	public static Tile highlightedTile;
+	public static bool inputEnabled = true;
+
+	[System.Obsolete]
+	private bool purchased = false;
 
 	private void OnEnable()
 	{
@@ -44,14 +31,14 @@ public class Tile : MonoBehaviour
 
 	private void OnMouseEnter()
 	{
-		border.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+		tile.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 		highlightedTile = this;
 	}
 
 	private void OnMouseExit()
 	{
-		border.color = Color.white;
-		if (highlightedTile = this)
+		tile.color = Color.white;
+		if (highlightedTile == this)
 		{
 			highlightedTile = null;
 		}
@@ -82,7 +69,7 @@ public class Tile : MonoBehaviour
 			{
 				productionBuilding.AttemptRepair();
 			}
-			
+
 		}
 		//If they own they tile and don't have a building, open up the buy menu.
 		else
@@ -97,8 +84,6 @@ public class Tile : MonoBehaviour
 	public void AcquireTile()
 	{
 		purchased = true;
-		fill.color = new Color(0.2f, 0.3f, 0.2f, 1f);
-		textMesh.SetText("");
 	}
 
 	public void AttemptModification()
@@ -151,7 +136,10 @@ public class Tile : MonoBehaviour
 	public void PlaceBuilding(BuildingProperties properties)
 	{
 		building = properties;
-		buildingSprite.sprite = building.sprite;
+		buildPrimary.sprite = properties.spritePrimary;
+		buildSecondary.sprite = properties.spriteSecondary;
+		buildExtra.sprite = properties.spriteExtra;
+		buildBackground.sprite = properties.spriteBackground;
 		if (properties.GetType() == typeof(ProductionProperties))
 		{
 			ProductionBuilding production = gameObject.AddComponent<ProductionBuilding>();
@@ -169,12 +157,11 @@ public class Tile : MonoBehaviour
 			Player.Deposit(building.value, transform.position);
 			Destroy(GetComponent<ProductionBuilding>());
 			building = null;
-			buildingSprite.sprite = null;
 
 			//Stop particle systems to prevent them from lingering.
-			var emission = GetComponent<ParticleSystem>().emission;
+			var emission = goldParticles.emission;
 			emission.rateOverTime = 0;
-			buildingSprite.GetComponent<ParticleSystem>().Stop();
+			smokeParticles.Stop();
 		}
 	}
 
