@@ -15,10 +15,10 @@ MonoBehaviour:
   title: Demonade Stand
   description: Great for cooling down during those hot days.
   icon: {fileID: 21300000, guid: acf7f38441f4cbc47bab776c27692e4f, type: 3}
-  spritePrimary: {fileID: 21300000, guid: 9dc4437c946f1624487f422b7d10a073, type: 3}
-  spriteSecondary: {fileID: 21300000, guid: ab62f761ef3b3ea41bf9bf8a61f04628, type: 3}
-  spriteExtra: {fileID: 21300000, guid: dc000bdfc86eaaf42a9ce9392231fd2e, type: 3}
-  spriteBackground: {fileID: 21300000, guid: 9f6b9583058e39a4bab73915781ac61c, type: 3}
+  spritePrimary: {fileID: 21300000, guid: 624363563847f904e921b492275494b1, type: 3}
+  spriteSecondary: {fileID: 21300000, guid: 9181be0501df2eb4d87ed371c566a119, type: 3}
+  spriteExtra: {fileID: 21300000, guid: 9a46674834f08be4bb135412ed49d284, type: 3}
+  spriteBackground: {fileID: 21300000, guid: a388ec8e10c64d64bb37c66a192da2c9, type: 3}
   starter: 0
   cost: 5
   value: 0

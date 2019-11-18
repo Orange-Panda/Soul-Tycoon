@@ -15,7 +15,10 @@ MonoBehaviour:
   title: Tony's T-Shirt Temple
   description: You wouldn't want to be caught dead wearing any other T-Shirt.
   icon: {fileID: 21300000, guid: e94337ae70f7bce489e93a84b4f3de29, type: 3}
-  sprite: {fileID: 21300000, guid: e94337ae70f7bce489e93a84b4f3de29, type: 3}
+  spritePrimary: {fileID: 21300000, guid: 57ebdac67e0b391409346e65d7d52575, type: 3}
+  spriteSecondary: {fileID: 21300000, guid: e34cf06f25d015c43a9d28edc9b1043a, type: 3}
+  spriteExtra: {fileID: 21300000, guid: acc174c9cdce15447b0104ca0f3d9cd0, type: 3}
+  spriteBackground: {fileID: 21300000, guid: 42e1b22c71596c84e90322f85f89c8e7, type: 3}
   starter: 0
   cost: 25
   value: 15

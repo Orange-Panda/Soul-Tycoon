@@ -16,7 +16,10 @@ MonoBehaviour:
   description: 'Try our new premiere dish: lava cakes and deviled eggs! For a limited
     time get a free apple with your order!'
   icon: {fileID: 21300000, guid: b03a9a08c7eb61a4e9a0f2209fa2a5d7, type: 3}
-  sprite: {fileID: 21300000, guid: b03a9a08c7eb61a4e9a0f2209fa2a5d7, type: 3}
+  spritePrimary: {fileID: 21300000, guid: a21a3028f92301d4883be9f653917038, type: 3}
+  spriteSecondary: {fileID: 21300000, guid: 6a96e2fad25cdbb44ab8e57a5bda22c9, type: 3}
+  spriteExtra: {fileID: 21300000, guid: 6e5525292de8c0b4583729ebeae9a759, type: 3}
+  spriteBackground: {fileID: 21300000, guid: 5a70b19afd2df104db149f8c95e192a2, type: 3}
   starter: 0
   cost: 1250
   value: 500

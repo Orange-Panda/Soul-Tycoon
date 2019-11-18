@@ -15,7 +15,10 @@ MonoBehaviour:
   title: Molt-N-Rocks
   description: You couldn't be any more correct when saying our products rock!
   icon: {fileID: 21300000, guid: 47fdbd76c3a860043813fc8bd40a00b8, type: 3}
-  sprite: {fileID: 21300000, guid: 47fdbd76c3a860043813fc8bd40a00b8, type: 3}
+  spritePrimary: {fileID: 21300000, guid: 492dc9d9f969369428731ff1d0637213, type: 3}
+  spriteSecondary: {fileID: 21300000, guid: 0c9e0331eacdc884dae58f4c43052d23, type: 3}
+  spriteExtra: {fileID: 21300000, guid: 00337e81d89ba0d4f83fa84936022abc, type: 3}
+  spriteBackground: {fileID: 21300000, guid: d90dfbf9c2ad4ed499b368593af04648, type: 3}
   starter: 0
   cost: 100
   value: 25
